@@ -1,16 +1,16 @@
 package laveuse;
 
-public class TrempageEssorage implements MachineState {
+public class Desinfection implements MachineState{
 
 	WashingMachine washingMachine;
-	int cycleTime = 30;
-	
-	public TrempageEssorage(WashingMachine newWashingMachine){
+	int cycleTime = 45;
+		
+	public Desinfection(WashingMachine newWashingMachine){
 		washingMachine = newWashingMachine;
 	}	
 	
 	public void startCycle(int cycleType) {
-		System.out.println("Cycle Trempage Essorage already Started");
+		System.out.println("Cycle Desinfection already Started");
 	}
 
 	public void pauseCycle() {
@@ -31,18 +31,22 @@ public class TrempageEssorage implements MachineState {
 		System.out.println("Impossible during this cycle");
 	}
 
+	@Override
 	public void stopCycle() {
-		System.out.println("Impossible to stop the cycle if not already paused");
+		System.out.println("Impossible to stop the cycle if not already paused");		
 	}
 
+	@Override
 	public void setTissueType(int tissueType) {
 		System.out.println("Impossible during a cycle");
 	}
 
+	@Override
 	public void setCycleType(int cycleType) {
 		System.out.println("Impossible during a cycle");
 	}
 
+	@Override
 	public void setWaterVolume(int volume) {
 		System.out.println("Impossible during a cycle");
 	}
