@@ -3,6 +3,7 @@ package laveuse;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,10 +17,16 @@ public class View extends JFrame{
 	private JButton rugueux = new JButton("Rugueux");
 	private JButton desinfection = new JButton("Desinfection");
 	private JButton trempageEssorage = new JButton("Trempage Essorage");
-	private JButton volumeDEau = new JButton("Augmenter Volume D'eau");
 	private JButton depart = new JButton("Départ");
 	private JLabel voyantLumineux = new JLabel("Voyant Lumineux");
 	private JButton arret = new JButton("Arrêt");
+	
+	
+	private JLabel textEau = new JLabel("Volume d'eau : ");
+	
+	String[] petStrings = {"0","10","20","30","40","50","60","70","80","90","100"};
+	
+	private JComboBox volumeDEau = new JComboBox(petStrings);
 	
 	public View(){
 		JPanel panelPrincipal = new JPanel();
@@ -31,10 +38,12 @@ public class View extends JFrame{
 		panelPrincipal.add(rugueux);
 		panelPrincipal.add(desinfection);
 		panelPrincipal.add(trempageEssorage);
+		panelPrincipal.add(textEau);
 		panelPrincipal.add(volumeDEau);
 		panelPrincipal.add(depart);
 		panelPrincipal.add(voyantLumineux);
 		panelPrincipal.add(arret);
+		
 		
 		this.add(panelPrincipal);
 		
@@ -48,6 +57,7 @@ public class View extends JFrame{
 			ActionListener cotonListener,
 			ActionListener rugueuxListener,
 			ActionListener syntheticListener,
+			ActionListener desinfectionListener,
 			ActionListener trempageEssorageListener,
 			ActionListener waterLevelListener,
 			ActionListener departListener,
@@ -57,12 +67,12 @@ public class View extends JFrame{
 		coton.addActionListener(cotonListener);
 		rugueux.addActionListener(rugueuxListener);
 		synthetic.addActionListener(syntheticListener);
+		desinfection.addActionListener(desinfectionListener);
 		trempageEssorage.addActionListener(trempageEssorageListener);
 		volumeDEau.addActionListener(waterLevelListener);
 		depart.addActionListener(departListener);
 		arret.addActionListener(arretListener);
 
-		
 	}
 	
 }

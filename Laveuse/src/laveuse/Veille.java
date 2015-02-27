@@ -34,6 +34,9 @@ private String cycleTypeName(int cycleType){
 			case 2:
 				cycleTypeName = "Trempage Essorage";
 				break;
+			case 3:
+				cycleTypeName = "Désinfection";
+				break;
 			default:
 				cycleTypeName = "Pas de tissu sélectionné";
 				break;
@@ -48,14 +51,23 @@ private String cycleTypeName(int cycleType){
 	@Override
 	public void startCycle(int cycleType) {
 		if(washingMachine.tissueType!=0){
-			if(cycleType==1){
+			switch(cycleType){
+			case 1:
 				System.out.println("Démarrage du lavage du tissu "+tissueTypeName(washingMachine.tissueType));
 				washingMachine.setMachineState(washingMachine.getLavage());
-			}else if(cycleType==2){
+				break;
+			case 2:
 				System.out.println("Démarrage du trempage essorage du tissu "+tissueTypeName(washingMachine.tissueType));
 				washingMachine.setMachineState(washingMachine.getTrempageEssorage());
-			}else{
-				System.out.println("Choose a cycle !!");
+				break;
+			case 3:
+				System.out.println("Démarrage de la désinfection du tissu "+tissueTypeName(washingMachine.tissueType));
+				washingMachine.setMachineState(washingMachine.getTrempageEssorage());
+				break;
+			default:
+				System.out.println("Démarrage du lavage (par défault) du tissu "+tissueTypeName(washingMachine.tissueType));
+				washingMachine.setMachineState(washingMachine.getLavage());
+				break;
 			}
 		}else{
 			System.out.println("Choose a tissue type first !");
@@ -127,6 +139,10 @@ private String cycleTypeName(int cycleType){
 			washingMachine.cycleType = 2;
 			System.out.println("Cycle sélectionné : "+cycleTypeName(washingMachine.cycleType));
 			break;
+		case 3:
+			washingMachine.cycleType = 3;
+			System.out.println("Cycle sélectionné : "+cycleTypeName(washingMachine.cycleType));
+			break;
 		default:
 			washingMachine.cycleType = 0;
 			System.out.println("Sélectionnez d'abord un type de tissu");
@@ -138,6 +154,7 @@ private String cycleTypeName(int cycleType){
 	public void setWaterVolume(int volume) {
 		// TODO Auto-generated method stub
 		washingMachine.WaterVolume = volume;
+		System.out.println("Volume d'eau sélectionné : "+washingMachine.WaterVolume);
 	}
 
 }
