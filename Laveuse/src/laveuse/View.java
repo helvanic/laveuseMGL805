@@ -14,6 +14,7 @@ public class View extends JFrame{
 	private JButton coton = new JButton("Coton");
 	private JButton synthetic = new JButton("Synthétique");
 	private JButton rugueux = new JButton("Rugueux");
+	private JButton desinfection = new JButton("Desinfection");
 	private JButton trempageEssorage = new JButton("Trempage Essorage");
 	private JButton volumeDEau = new JButton("Augmenter Volume D'eau");
 	private JButton depart = new JButton("Départ");
@@ -23,11 +24,12 @@ public class View extends JFrame{
 	public View(){
 		JPanel panelPrincipal = new JPanel();
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setSize(500, 120);
+		this.setSize(550, 120);
 		
 		panelPrincipal.add(coton);
 		panelPrincipal.add(synthetic);
 		panelPrincipal.add(rugueux);
+		panelPrincipal.add(desinfection);
 		panelPrincipal.add(trempageEssorage);
 		panelPrincipal.add(volumeDEau);
 		panelPrincipal.add(depart);

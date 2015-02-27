@@ -9,6 +9,7 @@ public class WashingMachine {
 	MachineState pause;
 	MachineState lavage;
 	MachineState trempageEssorage;
+	MachineState desinfection;
 	
 	MachineState machineState;
 	
@@ -40,6 +41,7 @@ public class WashingMachine {
 		pause = new Pause(this);
 		lavage = new Lavage(this);
 		trempageEssorage = new TrempageEssorage(this);
+		desinfection = new Desinfection(this);
 		
 		machineState = veille;
 		
@@ -82,10 +84,23 @@ public class WashingMachine {
 		machineState.setWaterVolume(volume);
 	};
 	
+	public int convertWaterLevelFromUI(){
+		return 1;
+	}
+	
+	public int convertWaterLevelFromSensor(){
+		return 1;
+	}
+	
+	public int convertTemperatureFromSensor(){
+		return 1;
+	}
+	
 	public MachineState getVeille(){return veille;}
 	public MachineState getPause(){return pause;}
 	public MachineState getLavage(){return lavage;}
 	public MachineState getTrempageEssorage(){return trempageEssorage;}
+	public MachineState getDesinfection(){return desinfection;}
 	
 	/*          View Listeners Methods     */
 	
@@ -114,6 +129,7 @@ public class WashingMachine {
 			}else{
 				setCycleType(1);
 			}
+			//Penser à rajouter le mode désinfection ! 
 		}	
 	}
 	
