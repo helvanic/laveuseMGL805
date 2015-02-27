@@ -3,12 +3,15 @@ package laveuse;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JComboBox;
+
 public class WashingMachine {
 
 	MachineState veille;
 	MachineState pause;
 	MachineState lavage;
 	MachineState trempageEssorage;
+	MachineState desinfection;
 	
 	MachineState machineState;
 	
@@ -31,6 +34,7 @@ public class WashingMachine {
 				new cotonListener(),
 				new rugueuxListener(),
 				new syntheticListener(),
+				new desinfectionListener(),
 				new trempageEssorageListener(),
 				new waterLevelListener(),
 				new departListener(),
@@ -40,6 +44,7 @@ public class WashingMachine {
 		pause = new Pause(this);
 		lavage = new Lavage(this);
 		trempageEssorage = new TrempageEssorage(this);
+		desinfection = new Desinfection(this);
 		
 		machineState = veille;
 		
@@ -82,10 +87,23 @@ public class WashingMachine {
 		machineState.setWaterVolume(volume);
 	};
 	
+	public int convertWaterLevelFromUI(){
+		return 1;
+	}
+	
+	public int convertWaterLevelFromSensor(){
+		return 1;
+	}
+	
+	public int convertTemperatureFromSensor(){
+		return 1;
+	}
+	
 	public MachineState getVeille(){return veille;}
 	public MachineState getPause(){return pause;}
 	public MachineState getLavage(){return lavage;}
 	public MachineState getTrempageEssorage(){return trempageEssorage;}
+	public MachineState getDesinfection(){return desinfection;}
 	
 	/*          View Listeners Methods     */
 	
@@ -107,19 +125,39 @@ public class WashingMachine {
 		}	
 	}
 	
+	class desinfectionListener implements ActionListener{
+		public void actionPerformed(ActionEvent arg0) {
+			setCycleType(3);
+		}
+		
+	}
+	
 	class trempageEssorageListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
-			if(cycleType==1){
+			switch(cycleType){
+			case 1:
 				setCycleType(2);
-			}else{
+				break;
+			case 2:
 				setCycleType(1);
+				break;
+			case 3:
+				setCycleType(2);
+				break;
+			default :
+				break;
 			}
+			//Penser à rajouter le mode désinfection ! C'est bon ! 
 		}	
 	}
 	
 	class waterLevelListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
 			//Rien pour l'instant
+			JComboBox cb = (JComboBox) arg0.getSource();
+			int chosenLevel = Integer.parseInt((String) cb.getSelectedItem());
+			System.out.println(chosenLevel);
+			setWaterVolume(chosenLevel);
 		}	
 	}
 	

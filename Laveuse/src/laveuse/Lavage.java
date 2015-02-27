@@ -12,7 +12,7 @@ public class Lavage implements MachineState {
 	
 	
 	public void startCycle(int cycleType) {
-		System.out.println("Cycle already Started");
+		System.out.println("Cycle Lavage already Started");
 	}
 
 	public void pauseCycle() {
