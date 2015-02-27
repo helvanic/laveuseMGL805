@@ -1,6 +1,8 @@
 package test;
 
 import static org.junit.Assert.*;
+import laveuse.View;
+import laveuse.WashingMachine;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -10,16 +12,12 @@ import org.junit.Test;
 
 public class STP_TC1_choixCycle {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
 	@Before
 	public void setUp() throws Exception {
+		View theView  = new View();
+		theView.setVisible(true);
+		
+		WashingMachine washingMachine = new WashingMachine(theView);
 	}
 
 	@After
@@ -28,7 +26,7 @@ public class STP_TC1_choixCycle {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		
 	}
 
 }
