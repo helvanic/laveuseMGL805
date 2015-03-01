@@ -4,7 +4,7 @@ public class Veille implements MachineState {
 
 	WashingMachine washingMachine;
 	
-	private String tissueTypeName(int tissueType){
+	private String tissueTypeName(){
 		
 		String tissueTypeName = "";
 		switch(washingMachine.tissueType){
@@ -24,7 +24,7 @@ public class Veille implements MachineState {
 		return tissueTypeName;	
 	}
 	
-private String cycleTypeName(int cycleType){
+private String cycleTypeName(){
 		
 		String cycleTypeName = "";
 		switch(washingMachine.cycleType){
@@ -53,19 +53,19 @@ private String cycleTypeName(int cycleType){
 		if(washingMachine.tissueType!=0){
 			switch(cycleType){
 			case 1:
-				System.out.println("Démarrage du lavage du tissu "+tissueTypeName(washingMachine.tissueType));
+				System.out.println("Démarrage du lavage du tissu "+tissueTypeName());
 				washingMachine.setMachineState(washingMachine.getLavage());
 				break;
 			case 2:
-				System.out.println("Démarrage du trempage essorage du tissu "+tissueTypeName(washingMachine.tissueType));
+				System.out.println("Démarrage du trempage essorage du tissu "+tissueTypeName());
 				washingMachine.setMachineState(washingMachine.getTrempageEssorage());
 				break;
 			case 3:
-				System.out.println("Démarrage de la désinfection du tissu "+tissueTypeName(washingMachine.tissueType));
+				System.out.println("Démarrage de la désinfection du tissu "+tissueTypeName());
 				washingMachine.setMachineState(washingMachine.getTrempageEssorage());
 				break;
 			default:
-				System.out.println("Démarrage du lavage (par défault) du tissu "+tissueTypeName(washingMachine.tissueType));
+				System.out.println("Démarrage du lavage (par défault) du tissu "+tissueTypeName());
 				washingMachine.setMachineState(washingMachine.getLavage());
 				break;
 			}
@@ -110,19 +110,19 @@ private String cycleTypeName(int cycleType){
 		switch(tissueType){
 		case 1:
 			washingMachine.tissueType = 1;
-			System.out.println("Tissu sélectionné : "+tissueTypeName(washingMachine.tissueType));
+			System.out.println("Tissu sélectionné : "+tissueTypeName());
 			break;
 		case 2: 
 			washingMachine.tissueType = 2;
-			System.out.println("Tissu sélectionné : "+tissueTypeName(washingMachine.tissueType));
+			System.out.println("Tissu sélectionné : "+tissueTypeName());
 			break;
 		case 3:
 			washingMachine.tissueType = 3;
-			System.out.println("Tissu sélectionné : "+tissueTypeName(washingMachine.tissueType));
+			System.out.println("Tissu sélectionné : "+tissueTypeName());
 			break;
 		default : 
 			washingMachine.tissueType = 0;
-			System.out.println("Tissu sélectionné : "+tissueTypeName(washingMachine.tissueType));
+			System.out.println("Tissu sélectionné : "+tissueTypeName());
 			break;
 		}
 	}
@@ -133,15 +133,15 @@ private String cycleTypeName(int cycleType){
 		switch(cycleType){
 		case 1:
 			washingMachine.cycleType = 1;
-			System.out.println("Cycle sélectionné : "+cycleTypeName(washingMachine.cycleType));
+			System.out.println("Cycle sélectionné : "+cycleTypeName());
 			break;
 		case 2:
 			washingMachine.cycleType = 2;
-			System.out.println("Cycle sélectionné : "+cycleTypeName(washingMachine.cycleType));
+			System.out.println("Cycle sélectionné : "+cycleTypeName());
 			break;
 		case 3:
 			washingMachine.cycleType = 3;
-			System.out.println("Cycle sélectionné : "+cycleTypeName(washingMachine.cycleType));
+			System.out.println("Cycle sélectionné : "+cycleTypeName());
 			break;
 		default:
 			washingMachine.cycleType = 0;
