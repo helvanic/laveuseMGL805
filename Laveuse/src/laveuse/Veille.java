@@ -18,7 +18,6 @@ public class Veille implements MachineState {
 				tissueTypeName = "Rugueux";
 				break;
 			default:
-				tissueTypeName = "Pas de tissu sélectionné";
 				break;
 		}
 		return tissueTypeName;	
@@ -29,7 +28,7 @@ private String cycleTypeName(){
 		String cycleTypeName = "";
 		switch(washingMachine.cycleType){
 			case 1:
-				cycleTypeName = "Lavage";
+				cycleTypeName = tissueTypeName();
 				break;
 			case 2:
 				cycleTypeName = "Trempage Essorage";
@@ -38,7 +37,6 @@ private String cycleTypeName(){
 				cycleTypeName = "Désinfection";
 				break;
 			default:
-				cycleTypeName = "Pas de tissu sélectionné";
 				break;
 		}
 		return cycleTypeName;	
@@ -53,19 +51,19 @@ private String cycleTypeName(){
 		if(washingMachine.tissueType!=0){
 			switch(cycleType){
 			case 1:
-				System.out.println("Démarrage du lavage du tissu "+tissueTypeName());
+				//System.out.println("Démarrage du lavage du tissu "+tissueTypeName());
 				washingMachine.setMachineState(washingMachine.getLavage());
 				break;
 			case 2:
-				System.out.println("Démarrage du trempage essorage du tissu "+tissueTypeName());
+				//System.out.println("Démarrage du trempage essorage du tissu "+tissueTypeName());
 				washingMachine.setMachineState(washingMachine.getTrempageEssorage());
 				break;
 			case 3:
-				System.out.println("Démarrage de la désinfection du tissu "+tissueTypeName());
-				washingMachine.setMachineState(washingMachine.getTrempageEssorage());
+				//System.out.println("Démarrage de la désinfection du tissu "+tissueTypeName());
+				washingMachine.setMachineState(washingMachine.getDesinfection());
 				break;
 			default:
-				System.out.println("Démarrage du lavage (par défault) du tissu "+tissueTypeName());
+				//System.out.println("Démarrage du lavage (par défault) du tissu "+tissueTypeName());
 				washingMachine.setMachineState(washingMachine.getLavage());
 				break;
 			}
@@ -83,25 +81,25 @@ private String cycleTypeName(){
 	@Override
 	public void injectSavon() {
 		// TODO Auto-generated method stub
-		System.out.println("Impossible");
+		//System.out.println("Impossible");
 	}
 
 	@Override
 	public void injectJavel() {
 		// TODO Auto-generated method stub
-		System.out.println("Impossible");
+		//System.out.println("Impossible");
 	}
 
 	@Override
 	public void injectAdoucisseur() {
 		// TODO Auto-generated method stub
-		System.out.println("Impossible");
+		//System.out.println("Impossible");
 	}
 
 	@Override
 	public void stopCycle() {
 		// TODO Auto-generated method stub
-		System.out.println("The cycle hasn't even started yet !");
+		//System.out.println("The cycle hasn't even started yet !");
 	}
 
 	@Override
@@ -110,19 +108,22 @@ private String cycleTypeName(){
 		switch(tissueType){
 		case 1:
 			washingMachine.tissueType = 1;
-			System.out.println("Tissu sélectionné : "+tissueTypeName());
+			//System.out.println("Tissu sélectionné : "+tissueTypeName());
+			View.affichage.setText(tissueTypeName());
 			break;
 		case 2: 
 			washingMachine.tissueType = 2;
-			System.out.println("Tissu sélectionné : "+tissueTypeName());
+			View.affichage.setText(tissueTypeName());
+			//System.out.println("Tissu sélectionné : "+tissueTypeName());
 			break;
 		case 3:
 			washingMachine.tissueType = 3;
-			System.out.println("Tissu sélectionné : "+tissueTypeName());
+			View.affichage.setText(tissueTypeName());
+			//System.out.println("Tissu sélectionné : "+tissueTypeName());
 			break;
 		default : 
 			washingMachine.tissueType = 0;
-			System.out.println("Tissu sélectionné : "+tissueTypeName());
+			//System.out.println("Tissu sélectionné : "+tissueTypeName());
 			break;
 		}
 	}
@@ -133,19 +134,22 @@ private String cycleTypeName(){
 		switch(cycleType){
 		case 1:
 			washingMachine.cycleType = 1;
-			System.out.println("Cycle sélectionné : "+cycleTypeName());
+			//System.out.println("Cycle sélectionné : "+cycleTypeName());
+			View.affichage.setText(cycleTypeName());
 			break;
 		case 2:
 			washingMachine.cycleType = 2;
-			System.out.println("Cycle sélectionné : "+cycleTypeName());
+			View.affichage.setText(cycleTypeName());
+			//System.out.println("Cycle sélectionné : "+cycleTypeName());
 			break;
 		case 3:
 			washingMachine.cycleType = 3;
-			System.out.println("Cycle sélectionné : "+cycleTypeName());
+			View.affichage.setText(cycleTypeName());
+			//System.out.println("Cycle sélectionné : "+cycleTypeName());
 			break;
 		default:
 			washingMachine.cycleType = 0;
-			System.out.println("Sélectionnez d'abord un type de tissu");
+			//System.out.println("Sélectionnez d'abord un type de tissu");
 			break;
 		}
 	}
@@ -154,7 +158,7 @@ private String cycleTypeName(){
 	public void setWaterVolume(int volume) {
 		// TODO Auto-generated method stub
 		washingMachine.WaterVolume = volume;
-		System.out.println("Volume d'eau sélectionné : "+washingMachine.WaterVolume);
+		//System.out.println("Volume d'eau sélectionné : "+washingMachine.WaterVolume);
 	}
 
 }

@@ -18,7 +18,6 @@ public class WashingMachine {
 	int WaterVolume = 0;
 	int cycleType = 1;
 	int tissueType = 0;
-	int timeSinceStart = 0;
 	boolean cyclePaused = false;
 	boolean savonInjected = false;
 	boolean javelInjected = false;
@@ -55,10 +54,6 @@ public class WashingMachine {
 		machineState = newState;
 	}
 	
-	public void setTimeSinceStart(int newTimeSinceStart){
-		timeSinceStart = newTimeSinceStart;
-	}
-	
 	public void startCycle(int cycleType){
 		machineState.startCycle(cycleType);
 	};
@@ -86,10 +81,9 @@ public class WashingMachine {
 	public void setWaterVolume(int volume){
 		machineState.setWaterVolume(volume);
 	};
-	
-	public int convertWaterLevelFromUI(){
-		return 1;
-	}
+	public void setAvecTrempage(boolean b){
+		((Lavage) machineState).setAvecTrempage(b);
+	};
 	
 	public int convertWaterLevelFromSensor(){
 		return 1;
@@ -109,18 +103,27 @@ public class WashingMachine {
 	
 	class cotonListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
+			/*if (cycleType!=1){
+				setCycleType(1);
+				setTissueType(1);
+			}else if (tissueType!=1){
+				setTissueType(1);
+			}*/
+			setCycleType(1);
 			setTissueType(1);
 		}	
 	}
 
 	class syntheticListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
+			setCycleType(1);
 			setTissueType(2);
 		}	
 	}
 	
 	class rugueuxListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
+			setCycleType(1);
 			setTissueType(3);
 		}	
 	}
@@ -128,18 +131,24 @@ public class WashingMachine {
 	class desinfectionListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
 			setCycleType(3);
+			setTissueType(0);
 		}
 		
 	}
 	
 	class trempageEssorageListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
+			/* gérer l'indépendance du bouton */
 			switch(cycleType){
 			case 1:
 				setCycleType(2);
 				break;
 			case 2:
-				setCycleType(1);
+				if (tissueType != 0){
+					setCycleType(1);
+				} else {
+					setCycleType(3);
+				}
 				break;
 			case 3:
 				setCycleType(2);
