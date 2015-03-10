@@ -1,5 +1,6 @@
 package laveuse;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -8,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.text.JTextComponent;
 
 
 public class View extends JFrame{
@@ -20,6 +24,7 @@ public class View extends JFrame{
 	private JButton depart = new JButton("Départ");
 	private JLabel voyantLumineux = new JLabel("Voyant Lumineux");
 	private JButton arret = new JButton("Arrêt");
+	public  static JTextPane affichage = new JTextPane();
 	
 	
 	private JLabel textEau = new JLabel("Volume d'eau : ");
@@ -31,7 +36,7 @@ public class View extends JFrame{
 	public View(){
 		JPanel panelPrincipal = new JPanel();
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setSize(550, 120);
+		this.setSize(550, 150);
 		
 		panelPrincipal.add(coton);
 		panelPrincipal.add(synthetic);
@@ -43,7 +48,9 @@ public class View extends JFrame{
 		panelPrincipal.add(depart);
 		panelPrincipal.add(voyantLumineux);
 		panelPrincipal.add(arret);
-		
+		affichage.setSelectionColor(new Color(1,1,1));;
+		affichage.setEnabled(false);
+		panelPrincipal.add(affichage);
 		
 		this.add(panelPrincipal);
 		
@@ -72,7 +79,6 @@ public class View extends JFrame{
 		volumeDEau.addActionListener(waterLevelListener);
 		depart.addActionListener(departListener);
 		arret.addActionListener(arretListener);
-
 	}
 	
 }
