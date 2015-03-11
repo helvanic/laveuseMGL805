@@ -37,14 +37,9 @@ public class Pause implements MachineState {
 
 	public void stopCycle() {
 		View.affichage.setText(FinalVariables.vidanging);
-		washingMachine.cycleType = 1;
+		washingMachine.cycleType = 0;
 		washingMachine.tissueType = 0;
-		washingMachine.cyclePaused = false;
-		washingMachine.javelInjected = false;
-		washingMachine.AssouplisseurInjected = false;
-		washingMachine.savonInjected = false;
 		washingMachine.WaterVolume = 0;
-		//System.out.println("Every single value set to 0 & false, stopping the machine now");
 		washingMachine.setMachineState(washingMachine.getVeille());
 	}
 

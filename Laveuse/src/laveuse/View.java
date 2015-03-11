@@ -16,20 +16,21 @@ import javax.swing.text.JTextComponent;
 
 public class View extends JFrame{
 	
-	private JButton coton = new JButton("Coton");
-	private JButton synthetic = new JButton("Synthétique");
-	private JButton rugueux = new JButton("Rugueux");
-	private JButton desinfection = new JButton("Desinfection");
-	private JButton trempageEssorage = new JButton("Trempage Essorage");
+	private JButton coton = new JButton(FinalVariables.Coton);
+	private JButton synthetic = new JButton(FinalVariables.Synthetique);
+	private JButton rugueux = new JButton(FinalVariables.Rugueux);
+	private JButton desinfection = new JButton(FinalVariables.Desinfection);
+	private JButton trempageEssorage = new JButton(FinalVariables.trempage);
 	private JButton depart = new JButton("Départ");
-	private JLabel voyantLumineux = new JLabel("Voyant Lumineux");
+	private JLabel voyantLumineux = new JLabel("Voyant Lumineux"); //voir pour mettre le voyant lumineux
 	private JButton arret = new JButton("Arrêt");
-	public  static JTextPane affichage = new JTextPane();
+	public  static JLabel affichage = new JLabel();
+	public static JLabel temps = new JLabel("");
 	
 	
 	private JLabel textEau = new JLabel("Volume d'eau : ");
 	
-	String[] petStrings = {"1","2","3","4","5","6","7","8","9","10"};
+	String[] petStrings = {"0","1","2","3","4","5","6","7","8","9","10"};
 	
 	private JComboBox volumeDEau = new JComboBox(petStrings);
 	
@@ -48,9 +49,8 @@ public class View extends JFrame{
 		panelPrincipal.add(depart);
 		panelPrincipal.add(voyantLumineux);
 		panelPrincipal.add(arret);
-		affichage.setSelectionColor(new Color(1,1,1));;
-		affichage.setEnabled(false);
 		panelPrincipal.add(affichage);
+		panelPrincipal.add(temps);
 		
 		this.add(panelPrincipal);
 		

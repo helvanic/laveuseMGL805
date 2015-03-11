@@ -1,74 +1,40 @@
 package laveuse;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
 public class Lavage implements MachineState {
 
 		
 	WashingMachine washingMachine;
-	int cycleTime = 60;
-	boolean avecTrempage = false;
+	
 	
 	public Lavage(WashingMachine newWashingMachine){
 		washingMachine = newWashingMachine;
 	}
 	
-	public void startCycle(int cycleType) {
-		//System.out.println("Cycle Lavage already Started");
-	}
+	public void startCycle(int cycleType) {}
 
 	public void pauseCycle() {
-		//System.out.println("Pausing the machine");
 		View.affichage.setText(FinalVariables.pause);
 		washingMachine.cyclePaused = true;
 		washingMachine.setMachineState(washingMachine.getPause());
-		//System.out.println(FinalVariables.pause);
 	}
 
-	public void injectSavon() {
-		if(washingMachine.WaterVolume>=20 && washingMachine.savonInjected==false){
-			//System.out.println("Injection Savon");
-			washingMachine.savonInjected = true;
-		}else if(washingMachine.WaterVolume<20){
-			//System.out.println("Pas assez d'eau");
-		}else if(washingMachine.savonInjected==true){
-			//System.out.println("Savon déjà injecté ! ");
-		}
-	}
+	public void injectSavon() {}
 
-	public void injectJavel() {
-		if(washingMachine.WaterVolume==100 && washingMachine.javelInjected==false){
-			//System.out.println("Injection Javellisant");
-			washingMachine.javelInjected = true;
-		}else if(washingMachine.WaterVolume<100){
-			//System.out.println("Pas assez d'eau");
-		}else if(washingMachine.javelInjected==true){
-			//System.out.println("Javellisant déjà injecté ! ");
-		}
-	}
+	public void injectJavel() {}
 
-	public void injectAdoucisseur() {
-		
-	}
+	public void injectAdoucisseur() {}
 
-	public void stopCycle() {
-		//System.out.println("Impossible to stop the cycle if not already paused");
-	}
+	public void stopCycle() {}
 
-	public void setTissueType(int tissueType) {
-		//System.out.println("Impossible during a cycle");
-	}
+	public void setTissueType(int tissueType) {}
 
-	public void setCycleType(int cycleType) {
-		//System.out.println("Impossible during a cycle");
-	}
+	public void setCycleType(int cycleType) {}
 
-	public void setWaterVolume(int volume) {
-		//System.out.println("Impossible during a cycle");
-	}
-
-
-	public void setAvecTrempage(boolean b) {
-		// TODO Auto-generated method stub
-		avecTrempage = b;
-	}
+	public void setWaterVolume(int volume) {}
 
 }

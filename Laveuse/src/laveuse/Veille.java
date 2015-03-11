@@ -4,161 +4,202 @@ public class Veille implements MachineState {
 
 	WashingMachine washingMachine;
 	
-	private String tissueTypeName(){
-		
-		String tissueTypeName = "";
-		switch(washingMachine.tissueType){
-			case 1:
-				tissueTypeName = "Coton";
-				break;
-			case 2:
-				tissueTypeName = "Synthétique";
-				break;
-			case 3:
-				tissueTypeName = "Rugueux";
-				break;
-			default:
-				break;
-		}
-		return tissueTypeName;	
-	}
-	
 private String cycleTypeName(){
 		
 		String cycleTypeName = "";
 		switch(washingMachine.cycleType){
 			case 1:
-				cycleTypeName = tissueTypeName();
-				break;
+			switch(washingMachine.tissueType){
+				case 1:
+					cycleTypeName = FinalVariables.Coton;
+					break;
+				case 2:
+					cycleTypeName = FinalVariables.Synthetique;
+					break;
+				case 3:
+					cycleTypeName = FinalVariables.Rugueux;
+					break;
+				case 4:
+					cycleTypeName = FinalVariables.Desinfection;
+					break;
+				default:
+					break;
+			}
+			break;
 			case 2:
-				cycleTypeName = "Trempage Essorage";
-				break;
-			case 3:
-				cycleTypeName = "Désinfection";
-				break;
+				switch(washingMachine.tissueType){
+				case 1:
+					cycleTypeName = FinalVariables.Cotonplus;
+					break;
+				case 2:
+					cycleTypeName = FinalVariables.Synthétiqueplus;
+					break;
+				case 3:
+					cycleTypeName = FinalVariables.Rugueuxplus;
+					break;
+				case 4:
+					cycleTypeName = FinalVariables.Desinfectionplus;
+					break;
+				default:
+					cycleTypeName = FinalVariables.trempage;
+					break;
+			}
+			break;
 			default:
 				break;
 		}
 		return cycleTypeName;	
 	}
+
+public int Tempscycle(){
+	
+	int Tempscycle = 0;
+	switch(washingMachine.cycleType){
+		case 1:
+		switch(washingMachine.tissueType){
+			case 1:
+				Tempscycle = 55;
+				break;
+			case 2:
+				Tempscycle = 35;
+				break;
+			case 3:
+				Tempscycle = 55;
+				break;
+			case 4:
+				Tempscycle = 55;
+				break;
+			default:
+				break;
+		}
+		break;
+		case 2:
+			switch(washingMachine.tissueType){
+			case 1:
+				Tempscycle = 85;
+				break;
+			case 2:
+				Tempscycle = 65;
+				break;
+			case 3:
+				Tempscycle = 85;
+				break;
+			case 4:
+				Tempscycle = 85;
+				break;
+			default:
+				Tempscycle = 25;
+				break;
+		}
+		break;
+		default:
+			break;
+	}
+	return Tempscycle;	
+}
 	
 	public Veille(WashingMachine newWashingMachine){
 		washingMachine = newWashingMachine;
 	}
 	
 	@Override
+	public void setWaterVolume(int volume) {
+		washingMachine.WaterVolume = volume;
+	}
+	
+	@Override
 	public void startCycle(int cycleType) {
-		if(washingMachine.tissueType!=0){
 			switch(cycleType){
 			case 1:
-				//System.out.println("Démarrage du lavage du tissu "+tissueTypeName());
 				washingMachine.setMachineState(washingMachine.getLavage());
+				washingMachine.timer1.start();
 				break;
 			case 2:
-				//System.out.println("Démarrage du trempage essorage du tissu "+tissueTypeName());
 				washingMachine.setMachineState(washingMachine.getTrempageEssorage());
 				break;
-			case 3:
-				//System.out.println("Démarrage de la désinfection du tissu "+tissueTypeName());
-				washingMachine.setMachineState(washingMachine.getDesinfection());
-				break;
 			default:
-				//System.out.println("Démarrage du lavage (par défault) du tissu "+tissueTypeName());
-				washingMachine.setMachineState(washingMachine.getLavage());
+				View.affichage.setText("Choisir un cycle");
 				break;
 			}
-		}else{
-			System.out.println("Choose a tissue type first !");
-		}
 	}
 
 	@Override
-	public void pauseCycle() {
-		// TODO Auto-generated method stub
-		System.out.println("You can't pause a cycle that hasn't begun !");
-	}
+	public void pauseCycle() {}
 
 	@Override
-	public void injectSavon() {
-		// TODO Auto-generated method stub
-		//System.out.println("Impossible");
-	}
+	public void injectSavon() {}
 
 	@Override
-	public void injectJavel() {
-		// TODO Auto-generated method stub
-		//System.out.println("Impossible");
-	}
+	public void injectJavel() {}
 
 	@Override
-	public void injectAdoucisseur() {
-		// TODO Auto-generated method stub
-		//System.out.println("Impossible");
-	}
+	public void injectAdoucisseur() {}
 
 	@Override
-	public void stopCycle() {
-		// TODO Auto-generated method stub
-		//System.out.println("The cycle hasn't even started yet !");
-	}
+	public void stopCycle() {}
 
 	@Override
 	public void setTissueType(int tissueType) {
-		// TODO Auto-generated method stub
 		switch(tissueType){
 		case 1:
 			washingMachine.tissueType = 1;
-			//System.out.println("Tissu sélectionné : "+tissueTypeName());
-			View.affichage.setText(tissueTypeName());
+			washingMachine.cycleTime = Tempscycle();
+			View.affichage.setText(cycleTypeName());
+			View.temps.setText("("+Integer.toString(Tempscycle())+"min)");
 			break;
 		case 2: 
 			washingMachine.tissueType = 2;
-			View.affichage.setText(tissueTypeName());
-			//System.out.println("Tissu sélectionné : "+tissueTypeName());
+			washingMachine.cycleTime = Tempscycle();
+			View.affichage.setText(cycleTypeName());
+			View.temps.setText("("+Integer.toString(Tempscycle())+"min)");
 			break;
 		case 3:
 			washingMachine.tissueType = 3;
-			View.affichage.setText(tissueTypeName());
-			//System.out.println("Tissu sélectionné : "+tissueTypeName());
+			washingMachine.cycleTime = Tempscycle();
+			View.affichage.setText(cycleTypeName());
+			View.temps.setText("("+Integer.toString(Tempscycle())+"min)");
+			break;
+		case 4:
+			washingMachine.tissueType = 4;
+			washingMachine.cycleTime = Tempscycle();
+			View.affichage.setText(cycleTypeName());
+			View.temps.setText("("+Integer.toString(Tempscycle())+"min)");
 			break;
 		default : 
 			washingMachine.tissueType = 0;
-			//System.out.println("Tissu sélectionné : "+tissueTypeName());
+			washingMachine.cycleTime = Tempscycle();
+			View.affichage.setText(cycleTypeName());
+			if (cycleTypeName().equals("")){
+				View.temps.setText("");
+			}else{
+				View.temps.setText("("+Integer.toString(Tempscycle())+"min)");
+			}
 			break;
 		}
 	}
 
 	@Override
 	public void setCycleType(int cycleType) {
-		// TODO Auto-generated method stub
 		switch(cycleType){
 		case 1:
 			washingMachine.cycleType = 1;
-			//System.out.println("Cycle sélectionné : "+cycleTypeName());
+			washingMachine.cycleTime = Tempscycle();
 			View.affichage.setText(cycleTypeName());
+			View.temps.setText("("+Integer.toString(Tempscycle())+"min)");
 			break;
 		case 2:
 			washingMachine.cycleType = 2;
+			washingMachine.cycleTime = Tempscycle();
 			View.affichage.setText(cycleTypeName());
-			//System.out.println("Cycle sélectionné : "+cycleTypeName());
-			break;
-		case 3:
-			washingMachine.cycleType = 3;
-			View.affichage.setText(cycleTypeName());
-			//System.out.println("Cycle sélectionné : "+cycleTypeName());
+			View.temps.setText("("+Integer.toString(Tempscycle())+"min)");
 			break;
 		default:
 			washingMachine.cycleType = 0;
-			//System.out.println("Sélectionnez d'abord un type de tissu");
+			washingMachine.cycleTime = Tempscycle();
+			View.affichage.setText("");
+			View.temps.setText("");
 			break;
 		}
-	}
-
-	@Override
-	public void setWaterVolume(int volume) {
-		// TODO Auto-generated method stub
-		washingMachine.WaterVolume = volume;
-		//System.out.println("Volume d'eau sélectionné : "+washingMachine.WaterVolume);
 	}
 
 }
