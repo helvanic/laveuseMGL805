@@ -15,11 +15,14 @@ public class Lavage implements MachineState {
 		washingMachine = newWashingMachine;
 	}
 	
-	public void startCycle(int cycleType) {}
+	public void startCycle(int cycleType) {
+		washingMachine.timer1.restart();
+	}
 
 	public void pauseCycle() {
 		View.affichage.setText(FinalVariables.pause);
 		washingMachine.cyclePaused = true;
+		washingMachine.timer1.stop();
 		washingMachine.setMachineState(washingMachine.getPause());
 	}
 
@@ -29,7 +32,9 @@ public class Lavage implements MachineState {
 
 	public void injectAdoucisseur() {}
 
-	public void stopCycle() {}
+	public void stopCycle() {
+		//arrêt de ce que la machine est en train de faire à rajouter
+	}
 
 	public void setTissueType(int tissueType) {}
 

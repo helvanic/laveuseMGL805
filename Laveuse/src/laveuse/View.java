@@ -1,6 +1,7 @@
 package laveuse;
 
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -30,7 +31,7 @@ public class View extends JFrame{
 	
 	private JLabel textEau = new JLabel("Volume d'eau : ");
 	
-	String[] petStrings = {"0","1","2","3","4","5","6","7","8","9","10"};
+	String[] petStrings = {"1","2","3","4","5","6","7","8","9","10"};
 	
 	private JComboBox volumeDEau = new JComboBox(petStrings);
 	

@@ -15,16 +15,17 @@ public class WashingMachine {
 	
 	MachineState machineState;
 	
-	int WaterVolume = 0;
+	String cycleTypeName = "";
+	int WaterVolume = 1;
 	int cycleType = 0;
 	int tissueType = 0;
-	int tempMax;
-	int tempMin;
-	int cadenceLavage;
-	int timeLav;
-	int timeEss;
-	int cycleTime;
-	int rotationEss;
+	int tempMax = 90;
+	int tempMin = 20;
+	int cadenceLavage = 0;
+	int rotationEss = 0;
+	int timeLav = 0;
+	int timeEss = 0;
+	int cycleTime = 0;
 	boolean cyclePaused = false;
 	boolean savonClosed = true;
 	boolean javelClosed = false;
@@ -72,7 +73,7 @@ public class WashingMachine {
 		
 	}
 	
-	/*           State methods                  */
+	/*méthodes qui envoie sur la méthode du machine state*/
 	void setMachineState(MachineState newState){
 		machineState = newState;
 	}
@@ -110,7 +111,7 @@ public class WashingMachine {
 	public MachineState getLavage(){return lavage;}
 	public MachineState getTrempageEssorage(){return trempageEssorage;}
 	
-	/*          View Listeners Methods     */
+	/*Action des boutons*/
 	
 	class cotonListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
