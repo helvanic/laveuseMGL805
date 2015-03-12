@@ -29,6 +29,6 @@ public class TrempageEssorage implements MachineState {
 
 	public void setCycleType(int cycleType) {}
 
-	public void setWaterVolume(int volume) {}
+	public void setWaterVolume(double volume) {}
 
 }

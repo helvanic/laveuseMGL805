@@ -16,13 +16,13 @@ public class Lavage implements MachineState {
 	}
 	
 	public void startCycle(int cycleType) {
-		washingMachine.timer1.restart();
+		washingMachine.timerCycle.restart();
 	}
 
 	public void pauseCycle() {
 		View.affichage.setText(FinalVariables.pause);
 		washingMachine.cyclePaused = true;
-		washingMachine.timer1.stop();
+		washingMachine.timerCycle.stop();
 		washingMachine.setMachineState(washingMachine.getPause());
 	}
 
@@ -40,6 +40,6 @@ public class Lavage implements MachineState {
 
 	public void setCycleType(int cycleType) {}
 
-	public void setWaterVolume(int volume) {}
+	public void setWaterVolume(double volume) {}
 
 }

@@ -51,7 +51,7 @@ public class Pause implements MachineState {
 		//System.out.println("Impossible in this state");
 	}
 
-	public void setWaterVolume(int volume) {
+	public void setWaterVolume(double volume) {
 		//System.out.println("Impossible in this state");
 	}
 

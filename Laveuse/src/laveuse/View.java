@@ -39,19 +39,27 @@ public class View extends JFrame{
 		JPanel panelPrincipal = new JPanel();
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(550, 150);
+		panelPrincipal.setLayout(new GridLayout(3, 5));
 		
+		/*1er ligne*/
 		panelPrincipal.add(coton);
 		panelPrincipal.add(synthetic);
 		panelPrincipal.add(rugueux);
 		panelPrincipal.add(desinfection);
 		panelPrincipal.add(trempageEssorage);
+		/*2ème ligne*/
 		panelPrincipal.add(textEau);
 		panelPrincipal.add(volumeDEau);
 		panelPrincipal.add(depart);
 		panelPrincipal.add(voyantLumineux);
 		panelPrincipal.add(arret);
+		/*3ème ligne*/
+		panelPrincipal.add(new JPanel());
+		panelPrincipal.add(new JPanel());
 		panelPrincipal.add(affichage);
 		panelPrincipal.add(temps);
+		panelPrincipal.add(new JPanel());
+		/*4ème ligne*/
 		
 		this.add(panelPrincipal);
 		

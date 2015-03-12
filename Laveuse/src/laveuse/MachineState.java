@@ -10,7 +10,7 @@ public interface MachineState {
 	void stopCycle();
 	void setTissueType(int tissueType);
 	void setCycleType(int cycleType);
-	void setWaterVolume(int volume);
+	void setWaterVolume(double volume);
 	
 	
 }
