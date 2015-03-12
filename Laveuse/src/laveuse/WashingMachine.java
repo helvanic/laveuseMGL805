@@ -15,8 +15,9 @@ public class WashingMachine {
 	
 	MachineState machineState;
 	
+	/*Choix préalable des values*/
 	String cycleTypeName = "";
-	int WaterVolume = 1;
+	double WaterVolume = 1.0;
 	int cycleType = 0;
 	int tissueType = 0;
 	int tempMax = 90;
@@ -25,31 +26,49 @@ public class WashingMachine {
 	int rotationEss = 0;
 	int timeLav = 0;
 	int timeEss = 0;
+	
+	/*Current values*/
+	int currentWaterVolume = 0;
 	int cycleTime = 0;
+	int currentTemp = 0;
+	int currentCadLavage = 0;
+	int currentRotEss = 0;
+	
+	/*gestion du foctionnement*/
 	boolean cyclePaused = false;
 	boolean savonClosed = true;
 	boolean javelClosed = false;
 	boolean assouplisseurClosed = false;
 	
-	private int seconde = 60;
-	final Timer timer1= new Timer(1000,new ActionListener()
+	final Timer timerRemplissage= new Timer(100,new ActionListener()
 	{
 		public void actionPerformed(ActionEvent e1)
 		{
-			seconde--;
+			/*setter le remplissage de l'eau avec les capteurs de température*/
+		}
+	});
+
+	final Timer timerCycle= new Timer(1000,new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e1)
+		{
+			/*seconde--;
 			if(seconde==0)
 			{
-				seconde=60;
+				seconde=60;*/
 				cycleTime--;
 				View.temps.setText("("+cycleTime+"min)");
-				if (cycleTime==0){
-					//vidange et remise en veille et arrêt du timer
+				if (cycleTime==5){
+					injectAdoucisseur();
+				} else if (cycleTime<=0){
+					arretMachine();
 				}
-			}
+			//}
 		}
 	});
 	
 	private View theView;
+
 	
 	public WashingMachine(View newView){
 		
@@ -70,6 +89,11 @@ public class WashingMachine {
 		trempageEssorage = new TrempageEssorage(this);
 		
 		machineState = veille;
+		
+	}
+	
+	private void arretMachine() {
+		timerCycle.stop();
 		
 	}
 	
@@ -102,7 +126,7 @@ public class WashingMachine {
 	public void setCycleType(int cycleType){
 		machineState.setCycleType(cycleType);
 	};
-	public void setWaterVolume(int volume){
+	public void setWaterVolume(double volume){
 		machineState.setWaterVolume(volume);
 	};
 	
@@ -126,7 +150,7 @@ public class WashingMachine {
 				setCycleType(1);
 				setTissueType(1);
 			}
-			System.out.println("cycle "+Integer.toString(cycleType)+" et Tissue "+Integer.toString(tissueType) + " Temps :"+Integer.toString(cycleTime));
+			//System.out.println("cycle "+Integer.toString(cycleType)+" et Tissue "+Integer.toString(tissueType) + " Temps :"+Integer.toString(cycleTime));
 		}	
 	}
 
@@ -143,7 +167,7 @@ public class WashingMachine {
 				setCycleType(1);
 				setTissueType(2);
 			}
-			System.out.println("cycle "+Integer.toString(cycleType)+" et Tissue "+Integer.toString(tissueType) + " Temps :"+Integer.toString(cycleTime));
+			//System.out.println("cycle "+Integer.toString(cycleType)+" et Tissue "+Integer.toString(tissueType) + " Temps :"+Integer.toString(cycleTime));
 		}	
 	}
 	
@@ -160,7 +184,7 @@ public class WashingMachine {
 				setCycleType(1);
 				setTissueType(3);
 			}
-			System.out.println("cycle "+Integer.toString(cycleType)+" et Tissue "+Integer.toString(tissueType) + " Temps :"+Integer.toString(cycleTime));
+			//System.out.println("cycle "+Integer.toString(cycleType)+" et Tissue "+Integer.toString(tissueType) + " Temps :"+Integer.toString(cycleTime));
 		}	
 	}
 	
@@ -177,7 +201,7 @@ public class WashingMachine {
 				setCycleType(1);
 				setTissueType(4);
 			}
-			System.out.println("cycle "+Integer.toString(cycleType)+" et Tissue "+Integer.toString(tissueType) + " Temps :"+Integer.toString(cycleTime));
+			//System.out.println("cycle "+Integer.toString(cycleType)+" et Tissue "+Integer.toString(tissueType) + " Temps :"+Integer.toString(cycleTime));
 		}
 		
 	}
@@ -192,16 +216,15 @@ public class WashingMachine {
 			}else{
 				setCycleType(2);
 			}
-			System.out.println("cycle "+Integer.toString(cycleType)+" et Tissue "+Integer.toString(tissueType) + " Temps :"+Integer.toString(cycleTime));
+			//System.out.println("cycle "+Integer.toString(cycleType)+" et Tissue "+Integer.toString(tissueType) + " Temps :"+Integer.toString(cycleTime));
 		}	
 	}
 	
 	class waterLevelListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
-			//Rien pour l'instant
 			JComboBox cb = (JComboBox) arg0.getSource();
 			int chosenLevel = Integer.parseInt((String) cb.getSelectedItem());
-			System.out.println(chosenLevel);
+			//System.out.println(chosenLevel);
 			setWaterVolume(chosenLevel);
 		}	
 	}

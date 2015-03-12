@@ -164,7 +164,7 @@ public int[] caracycle(){
 	}
 	
 	@Override
-	public void setWaterVolume(int volume) {
+	public void setWaterVolume(double volume) {
 		washingMachine.WaterVolume = volume;
 	}
 	
@@ -172,12 +172,14 @@ public int[] caracycle(){
 	public void startCycle(int cycleType) {
 			switch(cycleType){
 			case 1:
+				/*faire le remplissage*/
 				washingMachine.setMachineState(washingMachine.getLavage());
-				washingMachine.timer1.start();
+				washingMachine.timerCycle.start();
 				break;
 			case 2:
+				/*faire le remplissage*/
 				washingMachine.setMachineState(washingMachine.getTrempageEssorage());
-				washingMachine.timer1.start();
+				washingMachine.timerCycle.start();
 				break;
 			default:
 				View.affichage.setText("Choisir un cycle");
