@@ -23,7 +23,7 @@ public class Lavage implements MachineState {
 		washingMachine.cyclePaused = true;
 		washingMachine.waterSensor.timerRemplissage.stop();
 		washingMachine.timerCycle.stop();
-		washingMachine.timerTemperature.stop();
+		washingMachine.temperatureSensor.timerTemperature.stop();
 		washingMachine.setMachineState(washingMachine.getPause());
 	}
 

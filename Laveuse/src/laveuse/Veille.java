@@ -187,13 +187,13 @@ public int[] caracycle(){
 			case 1:
 				/*faire le remplissage*/
 				washingMachine.waterSensor.timerRemplissage.start();
-				washingMachine.timerTemperature.start();
+				washingMachine.temperatureSensor.timerTemperature.start();
 				washingMachine.setMachineState(washingMachine.getLavage());
 				washingMachine.timerCycle.start();
 				break;
 			case 2:
 				/*faire le remplissage*/
-				washingMachine.timerTemperature.start();
+				washingMachine.temperatureSensor.timerTemperature.start();
 				washingMachine.waterSensor.timerRemplissage.start();
 				washingMachine.setMachineState(washingMachine.getTrempageEssorage());
 				washingMachine.timerCycle.start();

@@ -16,7 +16,7 @@ public class WashingMachine {
 	MachineState machineState;
 
 	WaterSensor waterSensor = new WaterSensor(this);
-	TemperatureSensor temperatureSensor;
+	TemperatureSensor temperatureSensor = new TemperatureSensor(this);
 	
 	/*Choix préalable des values*/
 	String cycleTypeName = "";
@@ -45,31 +45,7 @@ public class WashingMachine {
 	boolean assouplisseurClosed = true;
 	
 	
-	final Timer timerTemperature= new Timer(200,new ActionListener()
-	{
-		public void actionPerformed(ActionEvent e1)
-		{
-			if(currentTemp<=((tempMax+tempMin)/2)){
-				currentTemp++;
-			}
-			View.temperature.setText("Température : "+currentTemp);
-		}
-	});
-	
-	final Timer timerCoolTemperature= new Timer(200,new ActionListener()
-	{
-		public void actionPerformed(ActionEvent e1)
-		{
-			currentTemp--;
-			if(currentTemp>=0){
-				View.temperature.setText("Température : "+currentTemp);
-			}else{
-				View.temperature.setText("Température : ");
-				timerCoolTemperature.stop();
-			}
-			
-		}
-	});
+
 
 	final Timer timerCycle= new Timer(1000,new ActionListener()
 	{
