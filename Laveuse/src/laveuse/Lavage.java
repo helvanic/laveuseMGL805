@@ -21,7 +21,7 @@ public class Lavage implements MachineState {
 	public void pauseCycle() {
 		View.affichage.setText(FinalVariables.pause);
 		washingMachine.cyclePaused = true;
-		washingMachine.timerRemplissage.stop();
+		washingMachine.waterSensor.timerRemplissage.stop();
 		washingMachine.timerCycle.stop();
 		washingMachine.timerTemperature.stop();
 		washingMachine.setMachineState(washingMachine.getPause());

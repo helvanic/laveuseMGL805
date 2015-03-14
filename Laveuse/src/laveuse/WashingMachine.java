@@ -15,7 +15,7 @@ public class WashingMachine {
 	
 	MachineState machineState;
 
-	WaterSensor waterSensor;
+	WaterSensor waterSensor = new WaterSensor(this);
 	TemperatureSensor temperatureSensor;
 	
 	/*Choix préalable des values*/
@@ -38,42 +38,12 @@ public class WashingMachine {
 	int currentRotEss = 0;
 	
 	/*gestion du fonctionnement*/
+	boolean cyclePlus = false;
 	boolean cyclePaused = false;
 	boolean savonClosed = true;
 	boolean javelClosed = true;
 	boolean assouplisseurClosed = true;
 	
-	final Timer timerRemplissage= new Timer(100,new ActionListener()
-	{
-		public void actionPerformed(ActionEvent e1)
-		{
-			currentWaterVolume+=1;
-			View.waterLevel.setValue(currentWaterVolume);
-			if(currentWaterVolume>=20 && savonClosed){
-				injectSavon();
-				savonClosed = false;
-			}else if(currentWaterVolume==100 && javelClosed){
-				injectJavel();
-				javelClosed = false;
-			}
-		}
-	});
-	
-	final Timer timerVidange= new Timer(100,new ActionListener()
-	{
-		public void actionPerformed(ActionEvent e1)
-		{
-			currentWaterVolume--;
-			View.temps.setText("");
-			View.voyantLumineux.setText("A l'arrêt");
-			if(currentWaterVolume>=0){
-				View.waterLevel.setValue(currentWaterVolume);
-			}else{
-				View.affichage.setText(FinalVariables.vidanged);
-				timerVidange.stop();
-			}
-		}
-	});
 	
 	final Timer timerTemperature= new Timer(200,new ActionListener()
 	{
@@ -110,15 +80,14 @@ public class WashingMachine {
 			{
 				seconde=60;*/
 			View.voyantLumineux.setText("En cours");
-				cycleTime--;
-				View.temps.setText("("+cycleTime+"min)");
-				if (cycleTime<=5 && assouplisseurClosed){
-					injectAdoucisseur();
-					assouplisseurClosed = false;
-				} else if (cycleTime<=0){
-					View.voyantLumineux.setText("A l'arrêt");
-					arretMachine();
-				}
+			cycleTime-=5;
+			View.temps.setText("("+cycleTime+"min)");
+			if (cycleTime<=5 && assouplisseurClosed){
+				injectAdoucisseur();
+				assouplisseurClosed = false;
+			} else if (cycleTime<=0){
+				arretMachine();
+			}
 			//}
 		}
 	});
@@ -151,7 +120,9 @@ public class WashingMachine {
 	
 	private void arretMachine() {
 		timerCycle.stop();
-		
+		pauseCycle();
+		waterSensor.tissuSupplementaire = tissueType;
+		stopCycle();		
 	}
 	
 	/*méthodes qui envoie sur la méthode du machine state*/
@@ -201,8 +172,10 @@ public class WashingMachine {
 				setTissueType(0);
 			}else if (cycleType==2 && tissueType==1){
 				setTissueType(0);
+				cyclePlus = false;
 			}else if (cycleType==2 && tissueType!=1){
 				setTissueType(1);
+				cyclePlus = true;
 			} else {
 				setCycleType(1);
 				setTissueType(1);
@@ -218,8 +191,10 @@ public class WashingMachine {
 				setTissueType(0);
 			}else if (cycleType==2 && tissueType==2){
 				setTissueType(0);
+				cyclePlus = false;
 			}else if (cycleType==2 && tissueType!=2){
 				setTissueType(2);
+				cyclePlus = true;
 			}else{
 				setCycleType(1);
 				setTissueType(2);
@@ -235,8 +210,10 @@ public class WashingMachine {
 				setTissueType(0);
 			}else if (cycleType==2 && tissueType==3){
 				setTissueType(0);
+				cyclePlus = false;
 			}else if (cycleType==2 && tissueType!=3){
 				setTissueType(3);
+				cyclePlus = true;
 			}else{
 				setCycleType(1);
 				setTissueType(3);
@@ -252,8 +229,10 @@ public class WashingMachine {
 				setTissueType(0);
 			}else if (cycleType==2 && tissueType==4){
 				setTissueType(0);
+				cyclePlus = false;
 			}else if (cycleType==2 && tissueType!=4){
 				setTissueType(4);
+				cyclePlus = true;
 			}else{
 				setCycleType(1);
 				setTissueType(4);
@@ -270,8 +249,12 @@ public class WashingMachine {
 				setCycleType(0);
 			}else if (cycleType==2 && tissueType!=0){
 				setCycleType(1);
+				cyclePlus = false;
 			}else{
-				setCycleType(2);
+				if(tissueType!=0){
+					cyclePlus = true;
+				}
+				setCycleType(2);				
 			}
 			//System.out.println("cycle "+Integer.toString(cycleType)+" et Tissue "+Integer.toString(tissueType) + " Temps :"+Integer.toString(cycleTime));
 		}	

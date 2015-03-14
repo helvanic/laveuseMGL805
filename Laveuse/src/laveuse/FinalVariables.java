@@ -17,5 +17,6 @@ public class FinalVariables {
 	public static final String savonInjection = "Injection Savon";
 	public static final String javelInjection = "Injection Javellisant";
 	public static final String assouplisseurInjection = "Injection Assouplisseur";
+	public static final String arret = "A l'arrêt";
 
 }

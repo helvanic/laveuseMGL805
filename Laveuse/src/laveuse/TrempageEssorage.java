@@ -14,17 +14,17 @@ public class TrempageEssorage implements MachineState {
 	public void pauseCycle() {
 		View.affichage.setText(FinalVariables.pause);
 		washingMachine.timerCycle.stop();
-		washingMachine.timerRemplissage.stop();
+		washingMachine.waterSensor.timerRemplissage.stop();
 		washingMachine.timerTemperature.stop();
 		washingMachine.cyclePaused = true;
 		washingMachine.setMachineState(washingMachine.getPause());
 	}
 
-	public void injectSavon() {}
+	public void injectSavon() {if(washingMachine.savonClosed){washingMachine.savonClosed=true;}}
 
-	public void injectJavel() {}
+	public void injectJavel() {if(washingMachine.savonClosed){washingMachine.javelClosed=true;}}
 
-	public void injectAdoucisseur() {}
+	public void injectAdoucisseur() {if(washingMachine.savonClosed){washingMachine.assouplisseurClosed=true;}}
 
 	public void stopCycle() {}
 
