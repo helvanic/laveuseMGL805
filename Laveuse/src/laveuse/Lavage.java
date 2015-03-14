@@ -10,27 +10,34 @@ public class Lavage implements MachineState {
 		
 	WashingMachine washingMachine;
 	
-	
 	public Lavage(WashingMachine newWashingMachine){
 		washingMachine = newWashingMachine;
 	}
 	
 	public void startCycle(int cycleType) {
-		washingMachine.timerCycle.restart();
+		//washingMachine.timerCycle.restart();
 	}
 
 	public void pauseCycle() {
 		View.affichage.setText(FinalVariables.pause);
 		washingMachine.cyclePaused = true;
+		washingMachine.timerRemplissage.stop();
 		washingMachine.timerCycle.stop();
+		washingMachine.timerTemperature.stop();
 		washingMachine.setMachineState(washingMachine.getPause());
 	}
 
-	public void injectSavon() {}
+	public void injectSavon() {
+		System.out.println(FinalVariables.savonInjection);
+	}
 
-	public void injectJavel() {}
+	public void injectJavel() {
+		System.out.println(FinalVariables.javelInjection);
+	}
 
-	public void injectAdoucisseur() {}
+	public void injectAdoucisseur() {
+		System.out.println(FinalVariables.assouplisseurInjection);
+	}
 
 	public void stopCycle() {
 		//arrêt de ce que la machine est en train de faire à rajouter

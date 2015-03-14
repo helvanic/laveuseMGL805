@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.text.JTextComponent;
@@ -23,25 +24,28 @@ public class View extends JFrame{
 	private JButton desinfection = new JButton(FinalVariables.Desinfection);
 	private JButton trempageEssorage = new JButton(FinalVariables.trempage);
 	private JButton depart = new JButton("Départ");
-	private JLabel voyantLumineux = new JLabel("Voyant Lumineux"); //voir pour mettre le voyant lumineux
+	public static JLabel voyantLumineux = new JLabel("Voyant Lumineux"); //voir pour mettre le voyant lumineux
 	private JButton arret = new JButton("Arrêt");
 	public  static JLabel affichage = new JLabel();
 	public static JLabel temps = new JLabel("");
+	public static JProgressBar waterLevel = new JProgressBar(0,100);
+	public JLabel textWaterLevel = new JLabel("Volume d'eau :");
+	public static JLabel temperature = new JLabel("Température : ");
 	
 	
 	private JLabel textEau = new JLabel("Volume d'eau : ");
 	
-	String[] petStrings = {"1","2","3","4","5","6","7","8","9","10"};
+	String[] volume = {"1","2","3","4","5","6","7","8","9","10"};
 	
-	private JComboBox volumeDEau = new JComboBox(petStrings);
+	private JComboBox volumeDEau = new JComboBox(volume);
 	
 	public View(){
 		JPanel panelPrincipal = new JPanel();
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(550, 150);
-		panelPrincipal.setLayout(new GridLayout(3, 5));
+		panelPrincipal.setLayout(new GridLayout(4, 5));
 		
-		/*1er ligne*/
+		/*1ère ligne*/
 		panelPrincipal.add(coton);
 		panelPrincipal.add(synthetic);
 		panelPrincipal.add(rugueux);
@@ -60,7 +64,12 @@ public class View extends JFrame{
 		panelPrincipal.add(temps);
 		panelPrincipal.add(new JPanel());
 		/*4ème ligne*/
-		
+		panelPrincipal.add(textWaterLevel);
+		waterLevel.setValue(0);
+		waterLevel.setStringPainted(true);
+		panelPrincipal.add(waterLevel);
+		panelPrincipal.add(temperature);
+	
 		this.add(panelPrincipal);
 		
 	}

@@ -11,8 +11,14 @@ public class Pause implements MachineState {
 	public void startCycle(int cycleType) {
 		//System.out.println("Restarting the cycle");
 		if(washingMachine.cycleType==1){
+			washingMachine.timerCycle.restart();
+			washingMachine.timerRemplissage.restart();
+			washingMachine.timerTemperature.restart();
 			washingMachine.setMachineState(washingMachine.getLavage());
 		}else if(washingMachine.cycleType==2){
+			washingMachine.timerCycle.restart();
+			washingMachine.timerRemplissage.restart();
+			washingMachine.timerTemperature.restart();
 			washingMachine.setMachineState(washingMachine.getTrempageEssorage());
 		}else{
 			washingMachine.setMachineState(washingMachine.getVeille());
@@ -40,6 +46,8 @@ public class Pause implements MachineState {
 		washingMachine.cycleType = 0;
 		washingMachine.tissueType = 0;
 		washingMachine.WaterVolume = 0;
+		washingMachine.timerVidange.start();
+		washingMachine.timerCoolTemperature.start();
 		washingMachine.setMachineState(washingMachine.getVeille());
 	}
 

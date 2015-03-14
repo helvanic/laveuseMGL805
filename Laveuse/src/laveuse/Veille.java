@@ -83,8 +83,8 @@ public int[] caracycle(){
 				cycleTime = timeLav + timeEss;
 				break;
 			case 3:
-				tempMin = 45;
-				tempMax = 10;
+				tempMin = 30;
+				tempMax = 40;
 				cadenceLavage = 8;
 				rotationEss = 20;
 				timeLav = 45;
@@ -173,11 +173,15 @@ public int[] caracycle(){
 			switch(cycleType){
 			case 1:
 				/*faire le remplissage*/
+				washingMachine.timerRemplissage.start();
+				washingMachine.timerTemperature.start();
 				washingMachine.setMachineState(washingMachine.getLavage());
 				washingMachine.timerCycle.start();
 				break;
 			case 2:
 				/*faire le remplissage*/
+				washingMachine.timerTemperature.start();
+				washingMachine.timerRemplissage.start();
 				washingMachine.setMachineState(washingMachine.getTrempageEssorage());
 				washingMachine.timerCycle.start();
 				break;

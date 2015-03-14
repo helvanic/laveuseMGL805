@@ -14,6 +14,9 @@ public class WashingMachine {
 	MachineState trempageEssorage;
 	
 	MachineState machineState;
+
+	WaterSensor waterSensor;
+	TemperatureSensor temperatureSensor;
 	
 	/*Choix préalable des values*/
 	String cycleTypeName = "";
@@ -34,17 +37,67 @@ public class WashingMachine {
 	int currentCadLavage = 0;
 	int currentRotEss = 0;
 	
-	/*gestion du foctionnement*/
+	/*gestion du fonctionnement*/
 	boolean cyclePaused = false;
 	boolean savonClosed = true;
-	boolean javelClosed = false;
-	boolean assouplisseurClosed = false;
+	boolean javelClosed = true;
+	boolean assouplisseurClosed = true;
 	
 	final Timer timerRemplissage= new Timer(100,new ActionListener()
 	{
 		public void actionPerformed(ActionEvent e1)
 		{
-			/*setter le remplissage de l'eau avec les capteurs de température*/
+			currentWaterVolume+=1;
+			View.waterLevel.setValue(currentWaterVolume);
+			if(currentWaterVolume>=20 && savonClosed){
+				injectSavon();
+				savonClosed = false;
+			}else if(currentWaterVolume==100 && javelClosed){
+				injectJavel();
+				javelClosed = false;
+			}
+		}
+	});
+	
+	final Timer timerVidange= new Timer(100,new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e1)
+		{
+			currentWaterVolume--;
+			View.temps.setText("");
+			View.voyantLumineux.setText("A l'arrêt");
+			if(currentWaterVolume>=0){
+				View.waterLevel.setValue(currentWaterVolume);
+			}else{
+				View.affichage.setText(FinalVariables.vidanged);
+				timerVidange.stop();
+			}
+		}
+	});
+	
+	final Timer timerTemperature= new Timer(200,new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e1)
+		{
+			if(currentTemp<=((tempMax+tempMin)/2)){
+				currentTemp++;
+			}
+			View.temperature.setText("Température : "+currentTemp);
+		}
+	});
+	
+	final Timer timerCoolTemperature= new Timer(200,new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e1)
+		{
+			currentTemp--;
+			if(currentTemp>=0){
+				View.temperature.setText("Température : "+currentTemp);
+			}else{
+				View.temperature.setText("Température : ");
+				timerCoolTemperature.stop();
+			}
+			
 		}
 	});
 
@@ -56,11 +109,14 @@ public class WashingMachine {
 			if(seconde==0)
 			{
 				seconde=60;*/
+			View.voyantLumineux.setText("En cours");
 				cycleTime--;
 				View.temps.setText("("+cycleTime+"min)");
-				if (cycleTime==5){
+				if (cycleTime<=5 && assouplisseurClosed){
 					injectAdoucisseur();
+					assouplisseurClosed = false;
 				} else if (cycleTime<=0){
+					View.voyantLumineux.setText("A l'arrêt");
 					arretMachine();
 				}
 			//}
@@ -68,6 +124,7 @@ public class WashingMachine {
 	});
 	
 	private View theView;
+
 
 	
 	public WashingMachine(View newView){

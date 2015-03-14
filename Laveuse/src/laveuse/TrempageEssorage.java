@@ -13,6 +13,9 @@ public class TrempageEssorage implements MachineState {
 
 	public void pauseCycle() {
 		View.affichage.setText(FinalVariables.pause);
+		washingMachine.timerCycle.stop();
+		washingMachine.timerRemplissage.stop();
+		washingMachine.timerTemperature.stop();
 		washingMachine.cyclePaused = true;
 		washingMachine.setMachineState(washingMachine.getPause());
 	}
