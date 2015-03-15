@@ -69,10 +69,10 @@ public class WashingMachine {
 	});
 	
 	private View theView;
-
+	private ViewVariables theViewVariables;
 
 	
-	public WashingMachine(View newView){
+	public WashingMachine(View newView, ViewVariables newViewVariables){
 		
 		this.theView = newView;
 		this.theView.addListeners(

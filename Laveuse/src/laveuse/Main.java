@@ -9,7 +9,9 @@ public class Main {
 		View theView  = new View();
 		theView.setVisible(true);
 		
-		WashingMachine washingMachine = new WashingMachine(theView);
+		ViewVariables theViewVariables  = new ViewVariables();
+		theViewVariables.setVisible(true);
+		
+		WashingMachine washingMachine = new WashingMachine(theView, theViewVariables);
 		}
-
 }

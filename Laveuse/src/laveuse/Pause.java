@@ -46,6 +46,15 @@ public class Pause implements MachineState {
 		washingMachine.cycleType = 0;
 		washingMachine.tissueType = 0;
 		washingMachine.WaterVolume = 0;
+		ViewVariables.savonInjecteValue.setText(FinalVariables.waiting);
+		ViewVariables.javelInjecteValue.setText(FinalVariables.waiting);
+		ViewVariables.adoucisseurInjecteValue.setText(FinalVariables.waiting);
+		
+		if(!washingMachine.cyclePlus){
+			ViewVariables.tissuValue.setText(FinalVariables.waitingForChoice);
+			ViewVariables.cycleValue.setText(FinalVariables.waitingForChoice);
+		}
+		
 		washingMachine.waterSensor.timerVidange.start();
 		washingMachine.temperatureSensor.timerCoolTemperature.start();
 		washingMachine.setMachineState(washingMachine.getVeille());
