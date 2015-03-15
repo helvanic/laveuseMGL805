@@ -43,8 +43,10 @@ public class WaterSensor {
 				View.affichage.setText(FinalVariables.vidanged);
 				if(washingMachine.cyclePlus){
 					washingMachine.cyclePlus = false;
+					washingMachine.tissueType = tissuSupplementaire;
+					washingMachine.cycleType = 1;
 					washingMachine.setTissueType(tissuSupplementaire);
-					washingMachine.setCycleType(1);
+					washingMachine.setCycleType(washingMachine.cycleType);
 					washingMachine.startCycle(washingMachine.cycleType);
 				//	System.out.println("Lancement du cycle "+washingMachine.cycleType+"  "+washingMachine.tissueType);
 				}

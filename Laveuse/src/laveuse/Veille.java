@@ -46,6 +46,7 @@ private String cycleTypeName(){
 			}
 			break;
 			default:
+				System.out.println("default");
 				break;
 		}
 		return cycleTypeName;	
@@ -241,6 +242,7 @@ public int[] caracycle(){
 			
 			washingMachine.cycleTypeName = cycleTypeName(); 
 			View.affichage.setText(washingMachine.cycleTypeName);
+			ViewVariables.tissuValue.setText(washingMachine.cycleTypeName);
 			View.temps.setText("("+donnees[7]+"min)");
 			break;
 		case 2: 
@@ -261,6 +263,7 @@ public int[] caracycle(){
 
 			washingMachine.cycleTypeName = cycleTypeName(); 
 			View.affichage.setText(washingMachine.cycleTypeName);
+			ViewVariables.tissuValue.setText(washingMachine.cycleTypeName);
 			View.temps.setText("("+donnees[7]+"min)");
 			break;
 		case 3:
@@ -281,6 +284,7 @@ public int[] caracycle(){
 
 			washingMachine.cycleTypeName = cycleTypeName(); 
 			View.affichage.setText(washingMachine.cycleTypeName);
+			ViewVariables.tissuValue.setText(washingMachine.cycleTypeName);
 			View.temps.setText("("+donnees[7]+"min)");
 			break;
 		case 4:
@@ -301,6 +305,7 @@ public int[] caracycle(){
 
 			washingMachine.cycleTypeName = cycleTypeName(); 
 			View.affichage.setText(washingMachine.cycleTypeName);
+			ViewVariables.tissuValue.setText(washingMachine.cycleTypeName);
 			View.temps.setText("("+donnees[7]+"min)");
 			break;
 		default : 
@@ -317,6 +322,7 @@ public int[] caracycle(){
 
 			washingMachine.cycleTypeName = cycleTypeName();
 			View.affichage.setText(cycleTypeName());
+			ViewVariables.tissuValue.setText("En attente de choix");
 			if (cycleTypeName().equals("")){
 				View.temps.setText("");
 			}else{
@@ -344,6 +350,7 @@ public int[] caracycle(){
 
 			washingMachine.cycleTypeName = cycleTypeName(); 
 			View.affichage.setText(washingMachine.cycleTypeName);
+			ViewVariables.cycleValue.setText("Lavage");
 			View.temps.setText("("+Integer.toString(donnees[7])+"min)");
 			break;
 		case 2:
@@ -360,7 +367,8 @@ public int[] caracycle(){
 			
 			washingMachine.cycleTypeName = cycleTypeName(); 
 			View.affichage.setText(washingMachine.cycleTypeName);
-			
+			ViewVariables.tissuValue.setText(washingMachine.cycleTypeName);
+			ViewVariables.cycleValue.setText("Trempage-Essorage");
 			View.temps.setText("("+Integer.toString(donnees[7])+"min)");
 			break;
 		default:

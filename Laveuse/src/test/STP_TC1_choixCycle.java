@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 import laveuse.View;
+import laveuse.ViewVariables;
 import laveuse.WashingMachine;
 
 import org.junit.After;
@@ -17,7 +18,10 @@ public class STP_TC1_choixCycle {
 		View theView  = new View();
 		theView.setVisible(true);
 		
-		WashingMachine washingMachine = new WashingMachine(theView);
+		ViewVariables theViewVariables  = new ViewVariables();
+		theViewVariables.setVisible(true);
+		
+		WashingMachine washingMachine = new WashingMachine(theView, theViewVariables);
 	}
 
 	@After
