@@ -42,9 +42,7 @@ public class Lavage implements MachineState {
 		ViewVariables.adoucisseurInjecteValue.setText(FinalVariables.injected);
 	}
 
-	public void stopCycle() {
-		//arrêt de ce que la machine est en train de faire à rajouter
-	}
+	public void stopCycle() {}
 
 	public void setTissueType(int tissueType) {}
 

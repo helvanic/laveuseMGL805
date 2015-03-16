@@ -55,8 +55,11 @@ public class WashingMachine {
 			if(seconde==0)
 			{
 				seconde=60;*/
-			View.voyantLumineux.setText("En cours");
-			cycleTime-=5;
+			if(View.voyantLumineux.getText().equals("Voyant")){
+				View.voyantLumineux.setText("En cours");
+			}else{
+				cycleTime-=1;
+			}
 			View.temps.setText("("+cycleTime+"min)");
 			if (cycleTime<=5 && assouplisseurClosed){
 				injectAdoucisseur();

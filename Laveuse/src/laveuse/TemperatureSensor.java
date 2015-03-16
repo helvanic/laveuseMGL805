@@ -17,9 +17,9 @@ public class TemperatureSensor {
 	{
 		public void actionPerformed(ActionEvent e1)
 		{
-			if(washingMachine.currentTemp<=((washingMachine.tempMax+washingMachine.tempMin)/2)){
-				washingMachine.currentTemp++;
-			}
+			//if(washingMachine.currentTemp<=((washingMachine.tempMax+washingMachine.tempMin)/2)){
+			washingMachine.currentTemp = (washingMachine.tempMax+washingMachine.tempMin)/2;
+			//}
 			View.temperature.setText("Température : "+washingMachine.currentTemp);
 		}
 	});
@@ -29,13 +29,11 @@ public class TemperatureSensor {
 		public void actionPerformed(ActionEvent e1)
 		{
 			washingMachine.currentTemp--;
-			if(washingMachine.currentTemp>=0){
+			if(washingMachine.currentTemp>=20){
 				View.temperature.setText("Température : "+washingMachine.currentTemp);
-			}else{
-				View.temperature.setText("Température : ");
+			}else if (washingMachine.currentTemp<20){
 				timerCoolTemperature.stop();
 			}
-			
 		}
 	});
 }

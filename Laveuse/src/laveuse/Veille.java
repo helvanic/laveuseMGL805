@@ -186,18 +186,26 @@ public int[] caracycle(){
 		washingMachine.assouplisseurClosed=true;
 			switch(cycleType){
 			case 1:
-				/*faire le remplissage*/
+				/*gestion température*/
+				//washingMachine.temperatureSensor.timerTemperature.start();
+				washingMachine.currentTemp = (washingMachine.tempMax+washingMachine.tempMin)/2;
+				View.temperature.setText("Température : "+washingMachine.currentTemp);
+				
 				washingMachine.waterSensor.timerRemplissage.start();
-				washingMachine.temperatureSensor.timerTemperature.start();
+				
 				washingMachine.setMachineState(washingMachine.getLavage());
-				washingMachine.timerCycle.start();
+				//washingMachine.timerCycle.start();
 				break;
 			case 2:
-				/*faire le remplissage*/
-				washingMachine.temperatureSensor.timerTemperature.start();
+				/*gestion température*/
+				//washingMachine.temperatureSensor.timerTemperature.start();
+				washingMachine.currentTemp = (washingMachine.tempMax+washingMachine.tempMin)/2;
+				View.temperature.setText("Température : "+washingMachine.currentTemp);
+				
 				washingMachine.waterSensor.timerRemplissage.start();
+				
 				washingMachine.setMachineState(washingMachine.getTrempageEssorage());
-				washingMachine.timerCycle.start();
+				//washingMachine.timerCycle.start();
 				break;
 			default:
 				View.affichage.setText("Choisir un cycle");
