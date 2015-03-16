@@ -22,14 +22,26 @@ public class WaterSensor {
 			washingMachine.currentWaterVolume+=1;
 			View.waterLevel.setValue(washingMachine.currentWaterVolume);
 			
-			if(washingMachine.currentWaterVolume==(washingMachine.WaterVolume*10)){
-				washingMachine.javelClosed = false;
-				washingMachine.injectJavel();
-				timerRemplissage.stop();
-				washingMachine.timerCycle.start();
-			}else if(washingMachine.currentWaterVolume>=(0.2*(washingMachine.WaterVolume*10)) && washingMachine.savonClosed){
-				washingMachine.savonClosed = false;
-				washingMachine.injectSavon();
+			if (washingMachine.tissueType == 4){
+				if(washingMachine.currentWaterVolume==(washingMachine.WaterVolume*5)){
+					washingMachine.javelClosed = false;
+					washingMachine.injectJavel();
+					timerRemplissage.stop();
+					washingMachine.timerCycle.start();
+				}else if(washingMachine.currentWaterVolume>=(0.2*(washingMachine.WaterVolume*5)) && washingMachine.savonClosed){
+					washingMachine.savonClosed = false;
+					washingMachine.injectSavon();
+				}
+			}else{
+				if(washingMachine.currentWaterVolume==(washingMachine.WaterVolume*10)){
+					washingMachine.javelClosed = false;
+					washingMachine.injectJavel();
+					timerRemplissage.stop();
+					washingMachine.timerCycle.start();
+				}else if(washingMachine.currentWaterVolume>=(0.2*(washingMachine.WaterVolume*10)) && washingMachine.savonClosed){
+					washingMachine.savonClosed = false;
+					washingMachine.injectSavon();
+				}
 			}
 		}
 	});

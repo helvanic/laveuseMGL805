@@ -97,7 +97,7 @@ public int[] caracycle(){
 				cycleTimeTotal = cycleTime;
 				break;
 			case 4:
-				tempMin = 85;
+				tempMin = 90;
 				tempMax = 90;
 				cadenceLavage = 10;
 				rotationEss = 20;
@@ -143,7 +143,7 @@ public int[] caracycle(){
 				cycleTimeTotal = cycleTime +30;
 				break;
 			case 4:
-				tempMin = 85;
+				tempMin = 90;
 				tempMax = 90;
 				cadenceLavage = 10;
 				rotationEss = 20;
