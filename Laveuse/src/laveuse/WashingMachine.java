@@ -33,12 +33,11 @@ public class WashingMachine {
 	/*Current values*/
 	int currentWaterVolume = 0;
 	int cycleTime = 0;
-	int currentTemp = 0;
+	int currentTemp = 20;
 	int currentCadLavage = 0;
 	int currentRotEss = 0;
 	
 	/*gestion du fonctionnement*/
-	boolean cyclePlus = false;
 	boolean cyclePaused = false;
 	boolean savonClosed = true;
 	boolean javelClosed = true;
@@ -51,15 +50,27 @@ public class WashingMachine {
 	{
 		public void actionPerformed(ActionEvent e1)
 		{
-			/*seconde--;
-			if(seconde==0)
-			{
-				seconde=60;*/
 			if(View.voyantLumineux.getText().equals("Voyant")){
 				View.voyantLumineux.setText("En cours");
 			}else{
 				cycleTime-=1;
 			}
+			if (cycleTime>timeEss+timeLav){
+				
+			}else if (cycleTime>timeEss){
+				if(currentCadLavage==0){
+					currentCadLavage = cadenceLavage;
+				}
+			}else if (cycleTime>0){
+				if(currentCadLavage!=0){
+					currentCadLavage = 0;
+				}
+				if (currentRotEss==0){
+					currentRotEss = rotationEss;
+				}
+			}
+			ViewVariables.apmValue.setText(Integer.toString(currentCadLavage));
+			ViewVariables.tpmValue.setText(Integer.toString(currentRotEss));
 			View.temps.setText("("+cycleTime+"min)");
 			if (cycleTime<=5 && assouplisseurClosed){
 				injectAdoucisseur();
@@ -98,9 +109,12 @@ public class WashingMachine {
 	}
 	
 	private void arretMachine() {
+		currentCadLavage = 0;
+		currentRotEss = 0;
+		ViewVariables.apmValue.setText(Integer.toString(currentCadLavage));
+		ViewVariables.tpmValue.setText(Integer.toString(currentRotEss));
 		timerCycle.stop();
 		pauseCycle();
-		waterSensor.tissuSupplementaire = tissueType;
 		stopCycle();		
 	}
 	
@@ -151,10 +165,8 @@ public class WashingMachine {
 				setTissueType(0);
 			}else if (cycleType==2 && tissueType==1){
 				setTissueType(0);
-				cyclePlus = false;
 			}else if (cycleType==2 && tissueType!=1){
 				setTissueType(1);
-				cyclePlus = true;
 			} else {
 				setCycleType(1);
 				setTissueType(1);
@@ -170,10 +182,8 @@ public class WashingMachine {
 				setTissueType(0);
 			}else if (cycleType==2 && tissueType==2){
 				setTissueType(0);
-				cyclePlus = false;
 			}else if (cycleType==2 && tissueType!=2){
 				setTissueType(2);
-				cyclePlus = true;
 			}else{
 				setCycleType(1);
 				setTissueType(2);
@@ -189,10 +199,8 @@ public class WashingMachine {
 				setTissueType(0);
 			}else if (cycleType==2 && tissueType==3){
 				setTissueType(0);
-				cyclePlus = false;
 			}else if (cycleType==2 && tissueType!=3){
 				setTissueType(3);
-				cyclePlus = true;
 			}else{
 				setCycleType(1);
 				setTissueType(3);
@@ -208,10 +216,8 @@ public class WashingMachine {
 				setTissueType(0);
 			}else if (cycleType==2 && tissueType==4){
 				setTissueType(0);
-				cyclePlus = false;
 			}else if (cycleType==2 && tissueType!=4){
 				setTissueType(4);
-				cyclePlus = true;
 			}else{
 				setCycleType(1);
 				setTissueType(4);
@@ -228,11 +234,7 @@ public class WashingMachine {
 				setCycleType(0);
 			}else if (cycleType==2 && tissueType!=0){
 				setCycleType(1);
-				cyclePlus = false;
 			}else{
-				if(tissueType!=0){
-					cyclePlus = true;
-				}
 				setCycleType(2);				
 			}
 			//System.out.println("cycle "+Integer.toString(cycleType)+" et Tissue "+Integer.toString(tissueType) + " Temps :"+Integer.toString(cycleTime));

@@ -26,14 +26,16 @@ public class ViewVariables extends JFrame{
 	public static JLabel adoucisseurInjecteValue = new JLabel(FinalVariables.waiting);
 	public static JLabel tissu = new JLabel("Tissu : ");
 	public static JLabel tissuValue = new JLabel(FinalVariables.waitingForChoice);
-	public static JLabel cycle = new JLabel("Cycle :");
-	public static JLabel cycleValue = new JLabel(FinalVariables.waitingForChoice);
+	public static JLabel apm = new JLabel("APM (agitation) : ");
+	public static JLabel apmValue = new JLabel(FinalVariables.waiting);
+	public static JLabel tpm = new JLabel("TPM (tour) : ");
+	public static JLabel tpmValue = new JLabel(FinalVariables.waiting);
 	
 	public ViewVariables(){
 		JPanel panelPrincipal = new JPanel();
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(300, 250);
-		panelPrincipal.setLayout(new GridLayout(5, 2));
+		panelPrincipal.setLayout(new GridLayout(6, 2));
 		
 		/*1ère ligne*/
 		panelPrincipal.add(savonInjecte);
@@ -48,8 +50,11 @@ public class ViewVariables extends JFrame{
 		panelPrincipal.add(tissu);
 		panelPrincipal.add(tissuValue);
 		/*5ème ligne*/
-		panelPrincipal.add(cycle);
-		panelPrincipal.add(cycleValue);
+		panelPrincipal.add(apm);
+		panelPrincipal.add(apmValue);
+		/*6ème ligne*/
+		panelPrincipal.add(tpm);
+		panelPrincipal.add(tpmValue);
 	
 		this.add(panelPrincipal);
 		

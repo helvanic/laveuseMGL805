@@ -30,20 +30,21 @@ public class View extends JFrame{
 	public static JLabel temps = new JLabel("");
 	public static JProgressBar waterLevel = new JProgressBar(0,100);
 	public JLabel textWaterLevel = new JLabel("Volume d'eau :");
-	public static JLabel temperature = new JLabel("Température : ");
+	public static JLabel temperature = new JLabel("Température : 20");
 	
 	
 	private JLabel textEau = new JLabel("Volume d'eau : ");
 	
-	String[] volume = {"1","2","3","4","5","6","7","8","9","10"};
+	private static String[] volume = {"1","2","3","4","5","6","7","8","9","10"};
 	
-	private JComboBox volumeDEau = new JComboBox(volume);
+	public static JComboBox volumeDEau = new JComboBox(volume);
 	
 	public View(){
 		JPanel panelPrincipal = new JPanel();
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(550, 150);
 		panelPrincipal.setLayout(new GridLayout(4, 5));
+		this.setLocationRelativeTo(null);
 		
 		/*1ère ligne*/
 		panelPrincipal.add(coton);
@@ -98,5 +99,4 @@ public class View extends JFrame{
 		depart.addActionListener(departListener);
 		arret.addActionListener(arretListener);
 	}
-	
 }

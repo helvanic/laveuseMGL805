@@ -61,7 +61,6 @@ public int[] caracycle(){
 	int timeLav = 0;
 	int timeEss = 0;
 	int cycleTime = 0;
-	int cycleTimeTotal = 0;
 	
 	switch(washingMachine.cycleType){
 		case 1:
@@ -74,7 +73,6 @@ public int[] caracycle(){
 				timeLav = 45;
 				timeEss = 10;
 				cycleTime = timeLav + timeEss;
-				cycleTimeTotal = cycleTime;
 				break;
 			case 2:
 				tempMin = 50;
@@ -84,7 +82,6 @@ public int[] caracycle(){
 				timeLav = 30;
 				timeEss = 5;
 				cycleTime = timeLav + timeEss;
-				cycleTimeTotal = cycleTime;
 				break;
 			case 3:
 				tempMin = 30;
@@ -94,7 +91,6 @@ public int[] caracycle(){
 				timeLav = 45;
 				timeEss = 10;
 				cycleTime = timeLav + timeEss;
-				cycleTimeTotal = cycleTime;
 				break;
 			case 4:
 				tempMin = 90;
@@ -104,7 +100,6 @@ public int[] caracycle(){
 				timeLav = 45;
 				timeEss = 10;
 				cycleTime = timeLav + timeEss;
-				cycleTimeTotal = cycleTime;
 				break;
 			default:
 				break;
@@ -119,8 +114,7 @@ public int[] caracycle(){
 				rotationEss = 20;
 				timeLav = 45;
 				timeEss = 10;
-				cycleTime = timeLav + timeEss;
-				cycleTimeTotal = cycleTime +30;
+				cycleTime = timeLav + timeEss + 30;
 				break;
 			case 2:
 				tempMin = 50;
@@ -129,8 +123,7 @@ public int[] caracycle(){
 				rotationEss = 10;
 				timeLav = 30;
 				timeEss = 5;
-				cycleTime = timeLav + timeEss;
-				cycleTimeTotal = cycleTime +30;
+				cycleTime = timeLav + timeEss + 30;
 				break;
 			case 3:
 				tempMin = 30;
@@ -139,8 +132,7 @@ public int[] caracycle(){
 				rotationEss = 20;
 				timeLav = 45;
 				timeEss = 10;
-				cycleTime = timeLav + timeEss;
-				cycleTimeTotal = cycleTime +30;
+				cycleTime = timeLav + timeEss + 30;
 				break;
 			case 4:
 				tempMin = 90;
@@ -149,8 +141,7 @@ public int[] caracycle(){
 				rotationEss = 20;
 				timeLav = 45;
 				timeEss = 10;
-				cycleTime = timeLav + timeEss;
-				cycleTimeTotal = cycleTime +30;
+				cycleTime = timeLav + timeEss + 30;
 				break;
 			default:
 				tempMin = 20;
@@ -160,14 +151,13 @@ public int[] caracycle(){
 				timeLav = 10;
 				timeEss = 15;
 				cycleTime = timeLav + timeEss;
-				cycleTimeTotal = cycleTime;
 				break;
 			}	
 			break;
 		default:
 			break;
 	}
-	return new int[]{tempMin,tempMax,cadenceLavage,rotationEss,timeLav,timeEss,cycleTime,cycleTimeTotal};	
+	return new int[]{tempMin,tempMax,cadenceLavage,rotationEss,timeLav,timeEss,cycleTime};	
 }
 	
 	public Veille(WashingMachine newWashingMachine){
@@ -186,26 +176,26 @@ public int[] caracycle(){
 		washingMachine.assouplisseurClosed=true;
 			switch(cycleType){
 			case 1:
-				/*gestion température*/
-				//washingMachine.temperatureSensor.timerTemperature.start();
 				washingMachine.currentTemp = (washingMachine.tempMax+washingMachine.tempMin)/2;
 				View.temperature.setText("Température : "+washingMachine.currentTemp);
 				
 				washingMachine.waterSensor.timerRemplissage.start();
-				
 				washingMachine.setMachineState(washingMachine.getLavage());
-				//washingMachine.timerCycle.start();
 				break;
 			case 2:
-				/*gestion température*/
-				//washingMachine.temperatureSensor.timerTemperature.start();
-				washingMachine.currentTemp = (washingMachine.tempMax+washingMachine.tempMin)/2;
-				View.temperature.setText("Température : "+washingMachine.currentTemp);
-				
-				washingMachine.waterSensor.timerRemplissage.start();
-				
-				washingMachine.setMachineState(washingMachine.getTrempageEssorage());
-				//washingMachine.timerCycle.start();
+				if (washingMachine.tissueType!=0){
+					washingMachine.currentTemp = (washingMachine.tempMax+washingMachine.tempMin)/2;
+					View.temperature.setText("Température : "+washingMachine.currentTemp);
+					
+					washingMachine.waterSensor.timerRemplissage.start();
+					washingMachine.setMachineState(washingMachine.getLavage());
+				}else{
+					washingMachine.currentTemp = (washingMachine.tempMax+washingMachine.tempMin)/2;
+					View.temperature.setText("Température : "+washingMachine.currentTemp);
+					
+					washingMachine.waterSensor.timerRemplissage.start();
+					washingMachine.setMachineState(washingMachine.getTrempageEssorage());
+				}
 				break;
 			default:
 				View.affichage.setText("Choisir un cycle");
@@ -230,10 +220,10 @@ public int[] caracycle(){
 
 	@Override
 	public void setTissueType(int tissueType) {
+		washingMachine.tissueType = tissueType;
 		int [] donnees = new int[6];
 		switch(tissueType){
 		case 1:
-			washingMachine.tissueType = 1;
 			donnees = caracycle();
 			
 			washingMachine.tempMax = donnees[0];
@@ -242,19 +232,13 @@ public int[] caracycle(){
 			washingMachine.rotationEss = donnees[3];
 			washingMachine.timeLav = donnees[4];
 			washingMachine.timeEss = donnees[5];
-			if(washingMachine.cyclePlus){
-				washingMachine.cycleTime = 30;
-			}else{
-				washingMachine.cycleTime = donnees[6];
-			}
-			
+			washingMachine.cycleTime = donnees[6];
 			washingMachine.cycleTypeName = cycleTypeName(); 
 			View.affichage.setText(washingMachine.cycleTypeName);
 			ViewVariables.tissuValue.setText(washingMachine.cycleTypeName);
-			View.temps.setText("("+donnees[7]+"min)");
+			View.temps.setText("("+Integer.toString(washingMachine.cycleTime)+"min)");
 			break;
 		case 2: 
-			washingMachine.tissueType = 2;
 			donnees = caracycle();
 			
 			washingMachine.tempMax = donnees[0];
@@ -263,19 +247,13 @@ public int[] caracycle(){
 			washingMachine.rotationEss = donnees[3];
 			washingMachine.timeLav = donnees[4];
 			washingMachine.timeEss = donnees[5];
-			if(washingMachine.cyclePlus){
-				washingMachine.cycleTime = 30;
-			}else{
-				washingMachine.cycleTime = donnees[6];
-			}
-
+			washingMachine.cycleTime = donnees[6];
 			washingMachine.cycleTypeName = cycleTypeName(); 
 			View.affichage.setText(washingMachine.cycleTypeName);
 			ViewVariables.tissuValue.setText(washingMachine.cycleTypeName);
-			View.temps.setText("("+donnees[7]+"min)");
+			View.temps.setText("("+Integer.toString(washingMachine.cycleTime)+"min)");
 			break;
 		case 3:
-			washingMachine.tissueType = 3;
 			donnees = caracycle();
 			
 			washingMachine.tempMax = donnees[0];
@@ -284,19 +262,13 @@ public int[] caracycle(){
 			washingMachine.rotationEss = donnees[3];
 			washingMachine.timeLav = donnees[4];
 			washingMachine.timeEss = donnees[5];
-			if(washingMachine.cyclePlus){
-				washingMachine.cycleTime = 30;
-			}else{
-				washingMachine.cycleTime = donnees[6];
-			}
-
+			washingMachine.cycleTime = donnees[6];
 			washingMachine.cycleTypeName = cycleTypeName(); 
 			View.affichage.setText(washingMachine.cycleTypeName);
 			ViewVariables.tissuValue.setText(washingMachine.cycleTypeName);
-			View.temps.setText("("+donnees[7]+"min)");
+			View.temps.setText("("+Integer.toString(washingMachine.cycleTime)+"min)");
 			break;
 		case 4:
-			washingMachine.tissueType = 4;
 			donnees = caracycle();
 			
 			washingMachine.tempMax = donnees[0];
@@ -305,19 +277,13 @@ public int[] caracycle(){
 			washingMachine.rotationEss = donnees[3];
 			washingMachine.timeLav = donnees[4];
 			washingMachine.timeEss = donnees[5];
-			if(washingMachine.cyclePlus){
-				washingMachine.cycleTime = 30;
-			}else{
-				washingMachine.cycleTime = donnees[6];
-			}
-
+			washingMachine.cycleTime = donnees[6];
 			washingMachine.cycleTypeName = cycleTypeName(); 
 			View.affichage.setText(washingMachine.cycleTypeName);
 			ViewVariables.tissuValue.setText(washingMachine.cycleTypeName);
-			View.temps.setText("("+donnees[7]+"min)");
+			View.temps.setText("("+Integer.toString(washingMachine.cycleTime)+"min)");
 			break;
-		default : 
-			washingMachine.tissueType = 0;
+		default :
 			donnees = caracycle();
 			
 			washingMachine.tempMax = donnees[0];
@@ -334,7 +300,7 @@ public int[] caracycle(){
 			if (cycleTypeName().equals("")){
 				View.temps.setText("");
 			}else{
-				View.temps.setText("("+donnees[7]+"min)");
+				View.temps.setText("("+Integer.toString(washingMachine.cycleTime)+"min)");
 			}
 			break;
 		}
@@ -342,10 +308,10 @@ public int[] caracycle(){
 
 	@Override
 	public void setCycleType(int cycleType) {
+		washingMachine.cycleType = cycleType;
 		int [] donnees = new int[6];
 		switch(cycleType){
 		case 1:
-			washingMachine.cycleType = 1;
 			donnees = caracycle();
 			
 			washingMachine.tempMax = donnees[0];
@@ -358,11 +324,9 @@ public int[] caracycle(){
 
 			washingMachine.cycleTypeName = cycleTypeName(); 
 			View.affichage.setText(washingMachine.cycleTypeName);
-			ViewVariables.cycleValue.setText("Lavage");
-			View.temps.setText("("+Integer.toString(donnees[7])+"min)");
+			View.temps.setText("("+Integer.toString(washingMachine.cycleTime)+"min)");
 			break;
 		case 2:
-			washingMachine.cycleType = 2;
 			donnees = caracycle();
 			
 			washingMachine.tempMax = donnees[0];
@@ -371,16 +335,14 @@ public int[] caracycle(){
 			washingMachine.rotationEss = donnees[3];
 			washingMachine.timeLav = donnees[4];
 			washingMachine.timeEss = donnees[5];
-			washingMachine.cycleTime = 30;
+			washingMachine.cycleTime = donnees[6];
 			
 			washingMachine.cycleTypeName = cycleTypeName(); 
 			View.affichage.setText(washingMachine.cycleTypeName);
 			ViewVariables.tissuValue.setText(washingMachine.cycleTypeName);
-			ViewVariables.cycleValue.setText("Trempage-Essorage");
-			View.temps.setText("("+Integer.toString(donnees[7])+"min)");
+			View.temps.setText("("+Integer.toString(washingMachine.cycleTime)+"min)");
 			break;
 		default:
-			washingMachine.cycleType = 0;
 			donnees = caracycle();
 			
 			washingMachine.tempMax = donnees[0];

@@ -9,7 +9,6 @@ import javax.swing.Timer;
 public class WaterSensor {
 	
 	WashingMachine washingMachine;
-	public int tissuSupplementaire;
 	
 	public WaterSensor(WashingMachine newWashingMachine){
 		washingMachine = newWashingMachine;
@@ -50,21 +49,11 @@ public class WaterSensor {
 		public void actionPerformed(ActionEvent e1)
 		{
 			washingMachine.currentWaterVolume-=1;
-			View.temps.setText("");
-			View.voyantLumineux.setText(FinalVariables.arret);
-			if(washingMachine.currentWaterVolume>=0){
-				View.waterLevel.setValue(washingMachine.currentWaterVolume);
-			}else{
+			View.waterLevel.setValue(washingMachine.currentWaterVolume);
+			
+			if(washingMachine.currentWaterVolume<=0){
 				View.affichage.setText(FinalVariables.vidanged);
-				if(washingMachine.cyclePlus){
-					washingMachine.cyclePlus = false;
-					washingMachine.tissueType = tissuSupplementaire;
-					washingMachine.cycleType = 1;
-					washingMachine.setTissueType(tissuSupplementaire);
-					washingMachine.setCycleType(washingMachine.cycleType);
-					washingMachine.startCycle(washingMachine.cycleType);
-				//	System.out.println("Lancement du cycle "+washingMachine.cycleType+"  "+washingMachine.tissueType);
-				}
+				washingMachine.currentWaterVolume = 0;
 				timerVidange.stop();
 			}
 		}

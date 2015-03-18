@@ -32,6 +32,7 @@ public class TemperatureSensor {
 			if(washingMachine.currentTemp>=20){
 				View.temperature.setText("Température : "+washingMachine.currentTemp);
 			}else if (washingMachine.currentTemp<20){
+				washingMachine.currentTemp = 20;
 				timerCoolTemperature.stop();
 			}
 		}

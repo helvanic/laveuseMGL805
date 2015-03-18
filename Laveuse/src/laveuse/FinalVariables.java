@@ -19,7 +19,7 @@ public class FinalVariables {
 	public static final String assouplisseurInjection = "Injection Assouplisseur";
 	public static final String arret = "A l'arrêt";
 	public static final String injected = "Injecté";
-	public static final String waiting = "En attente : ";
+	public static final String waiting = "En attente";
 	public static final String waitingForChoice = "En attente d'un choix";
 
 }
