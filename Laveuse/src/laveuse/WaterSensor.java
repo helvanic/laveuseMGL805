@@ -18,6 +18,10 @@ public class WaterSensor {
 	{
 		public void actionPerformed(ActionEvent e1)
 		{
+			if (View.voyantLumineux.getText().equals("    Voyant")){
+				View.voyantLumineux.setText("   Remplissage");
+			}
+			
 			washingMachine.currentWaterVolume+=1;
 			View.waterLevel.setValue(washingMachine.currentWaterVolume);
 			
@@ -53,6 +57,7 @@ public class WaterSensor {
 			
 			if(washingMachine.currentWaterVolume<=0){
 				View.affichage.setText(FinalVariables.vidanged);
+				View.voyantLumineux.setText("    Voyant");
 				washingMachine.currentWaterVolume = 0;
 				timerVidange.stop();
 			}

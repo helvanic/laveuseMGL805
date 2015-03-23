@@ -171,6 +171,9 @@ public int[] caracycle(){
 	
 	@Override
 	public void startCycle(int cycleType) {
+		if (washingMachine.temperatureSensor.timerCoolTemperature.isRunning()){
+			washingMachine.temperatureSensor.timerCoolTemperature.stop();
+		}
 		washingMachine.savonClosed=true;
 		washingMachine.javelClosed=true;
 		washingMachine.assouplisseurClosed=true;

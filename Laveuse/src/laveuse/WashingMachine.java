@@ -50,8 +50,8 @@ public class WashingMachine {
 	{
 		public void actionPerformed(ActionEvent e1)
 		{
-			if(View.voyantLumineux.getText().equals("Voyant")){
-				View.voyantLumineux.setText("En cours");
+			if(View.voyantLumineux.getText().equals("   Remplissage")){
+				View.voyantLumineux.setText("    En cours");
 			}else{
 				cycleTime-=1;
 			}

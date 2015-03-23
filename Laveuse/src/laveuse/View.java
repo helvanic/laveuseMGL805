@@ -24,7 +24,7 @@ public class View extends JFrame{
 	private JButton desinfection = new JButton(FinalVariables.Desinfection);
 	private JButton trempageEssorage = new JButton(FinalVariables.trempage);
 	private JButton depart = new JButton("Départ");
-	public static JLabel voyantLumineux = new JLabel("Voyant"); //voir pour mettre le voyant lumineux
+	public static JLabel voyantLumineux = new JLabel("    Voyant"); //voir pour mettre le voyant lumineux
 	private JButton arret = new JButton("Arrêt");
 	public  static JLabel affichage = new JLabel();
 	public static JLabel temps = new JLabel("");
